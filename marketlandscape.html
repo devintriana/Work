@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClickUp · Market Landscape 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080808;
+  --surface:   #111111;
+  --surface2:  #161616;
+  --border:    #1f1f1f;
+  --border2:   #2a2a2a;
+  --text:      #e8e8e8;
+  --muted:     #888;
+  --faint:     #444;
+  --purple:    #7c3aed;
+  --purple-lt: #a78bfa;
+
+–fit-ht-bg:  #1c0a00;  –fit-ht-bd: #7c2d12;  –fit-ht-tx: #fb923c;
+–fit-na-bg:  #052016;  –fit-na-bd: #166534;   –fit-na-tx: #4ade80;
+–fit-st-bg:  #051530;  –fit-st-bd: #1e3a8a;   –fit-st-tx: #60a5fa;
+–fit-pa-bg:  #1a1200;  –fit-pa-bd: #713f12;   –fit-pa-tx: #fbbf24;
+–fit-wk-bg:  #1a0505;  –fit-wk-bd: #7f1d1d;   –fit-wk-tx: #f87171;
+–fit-no-bg:  #141414;  –fit-no-bd: #333;       –fit-no-tx: #555;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Inter’, sans-serif;
+font-size: 13px;
+line-height: 1.5;
+-webkit-font-smoothing: antialiased;
+}
+
+/* ── GATE ─────────────────────────────────── */
+#gate {
+position: fixed; inset: 0; z-index: 999;
+background: var(–bg);
+display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+gap: 32px;
+}
+
+.gate-wordmark {
+font-family: ‘Syne’, sans-serif;
+font-size: 28px; font-weight: 800;
+color: var(–purple-lt);
+letter-spacing: -0.5px;
+}
+
+.gate-meta {
+text-align: center;
+}
+
+.gate-meta h2 {
+font-family: ‘Syne’, sans-serif;
+font-size: 20px; font-weight: 700;
+color: var(–text);
+letter-spacing: -0.3px;
+}
+
+.gate-meta p {
+margin-top: 5px;
+font-size: 12px;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+.gate-form {
+display: flex; flex-direction: column;
+gap: 8px; width: 240px;
+}
+
+.gate-form input {
+padding: 11px 14px;
+background: var(–surface);
+border: 1px solid var(–border2);
+border-radius: 6px;
+color: var(–text);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 13px;
+letter-spacing: 3px;
+text-align: center;
+outline: none;
+}
+.gate-form input:focus { border-color: var(–purple); }
+
+.gate-form button {
+padding: 11px;
+background: var(–purple);
+border: none; border-radius: 6px;
+color: #fff;
+font-family: ‘Syne’, sans-serif;
+font-size: 13px; font-weight: 700;
+cursor: pointer;
+letter-spacing: 0.3px;
+}
+.gate-form button:hover { background: #6d28d9; }
+
+.gate-err {
+font-size: 11px; color: #f87171;
+text-align: center; display: none;
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+/* ── APP ──────────────────────────────────── */
+#app { display: none; }
+
+/* ── HEADER ───────────────────────────────── */
+.site-header {
+border-bottom: 1px solid var(–border);
+padding: 20px 32px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 24px;
+flex-wrap: wrap;
+}
+
+.header-left {}
+
+.header-wordmark {
+font-family: ‘Syne’, sans-serif;
+font-size: 14px; font-weight: 800;
+color: var(–purple-lt);
+letter-spacing: -0.2px;
+margin-bottom: 4px;
+}
+
+.header-title {
+font-family: ‘Syne’, sans-serif;
+font-size: 26px; font-weight: 800;
+color: var(–text);
+letter-spacing: -0.8px;
+line-height: 1.1;
+}
+
+.header-title span { color: var(–purple-lt); }
+
+.header-sub {
+margin-top: 6px;
+font-size: 12px;
+color: var(–muted);
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+.header-stats {
+display: flex; gap: 2px;
+flex-wrap: wrap;
+align-items: flex-start;
+margin-top: 4px;
+}
+
+.hstat {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 10px 16px;
+min-width: 90px;
+}
+
+.hstat-n {
+font-family: ‘Syne’, sans-serif;
+font-size: 22px; font-weight: 800;
+letter-spacing: -1px;
+line-height: 1;
+}
+
+.hstat-n.purple { color: var(–purple-lt); }
+.hstat-n.orange { color: #fb923c; }
+.hstat-n.green  { color: #4ade80; }
+.hstat-n.blue   { color: #60a5fa; }
+
+.hstat-l {
+font-size: 9px; font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+color: var(–faint);
+margin-top: 3px;
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+/* ── CONTROLS ─────────────────────────────── */
+.controls {
+padding: 16px 32px;
+border-bottom: 1px solid var(–border);
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.filter-row {
+display: flex; gap: 6px;
+flex-wrap: wrap;
+align-items: center;
+}
+
+.filter-label {
+font-size: 9px; font-weight: 600;
+letter-spacing: 1.5px; text-transform: uppercase;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+min-width: 60px;
+}
+
+.fchip {
+padding: 4px 10px;
+border-radius: 4px;
+font-size: 11px; font-weight: 600;
+border: 1px solid var(–border2);
+background: var(–surface);
+color: var(–muted);
+cursor: pointer;
+font-family: ‘JetBrains Mono’, monospace;
+transition: all 0.1s;
+white-space: nowrap;
+}
+
+.fchip:hover { border-color: #333; color: var(–text); }
+
+.fchip.active-all {
+background: var(–surface2);
+border-color: var(–border2);
+color: var(–text);
+}
+
+.fchip.active-ht  { background: var(–fit-ht-bg); border-color: var(–fit-ht-bd); color: var(–fit-ht-tx); }
+.fchip.active-nat { background: var(–fit-na-bg); border-color: var(–fit-na-bd); color: var(–fit-na-tx); }
+.fchip.active-str { background: var(–fit-st-bg); border-color: var(–fit-st-bd); color: var(–fit-st-tx); }
+.fchip.active-par { background: var(–fit-pa-bg); border-color: var(–fit-pa-bd); color: var(–fit-pa-tx); }
+.fchip.active-wk  { background: var(–fit-wk-bg); border-color: var(–fit-wk-bd); color: var(–fit-wk-tx); }
+.fchip.active-no  { background: var(–fit-no-bg); border-color: var(–fit-no-bd); color: var(–fit-no-tx); }
+
+.cat-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.cchip {
+padding: 3px 9px;
+border-radius: 20px;
+font-size: 10px; font-weight: 600;
+border: 1px solid var(–border);
+background: transparent;
+color: var(–faint);
+cursor: pointer;
+font-family: ‘Inter’, sans-serif;
+transition: all 0.1s;
+}
+.cchip:hover { border-color: var(–border2); color: var(–muted); }
+.cchip.active { border-color: var(–purple); color: var(–purple-lt); background: #10072a; }
+
+/* search */
+.search-wrap {
+display: flex; align-items: center; gap: 10px;
+}
+
+.search-wrap input {
+padding: 6px 12px;
+background: var(–surface);
+border: 1px solid var(–border2);
+border-radius: 6px;
+color: var(–text);
+font-family: ‘Inter’, sans-serif;
+font-size: 12px;
+width: 220px;
+outline: none;
+}
+.search-wrap input:focus { border-color: var(–purple); }
+.search-wrap input::placeholder { color: var(–faint); }
+
+.result-count {
+font-size: 11px;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+/* ── TABLE ────────────────────────────────── */
+.table-wrap {
+overflow-x: auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+min-width: 900px;
+}
+
+thead th {
+padding: 8px 12px;
+text-align: left;
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+border-bottom: 1px solid var(–border);
+white-space: nowrap;
+background: var(–bg);
+position: sticky;
+top: 0;
+z-index: 10;
+}
+
+.tr-main {
+border-bottom: 1px solid var(–border);
+cursor: pointer;
+}
+
+.tr-main:hover td { background: var(–surface2); }
+
+.tr-main td {
+padding: 11px 12px;
+vertical-align: middle;
+}
+
+/* category group header */
+.tr-cat-header td {
+padding: 6px 12px 4px;
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+background: var(–bg);
+border-bottom: 1px solid var(–border);
+}
+
+/* expand row */
+.tr-detail {
+display: none;
+border-bottom: 1px solid var(–border);
+}
+
+.tr-detail.open {
+display: table-row;
+}
+
+.tr-detail td {
+padding: 0;
+}
+
+.detail-inner {
+padding: 16px 20px 20px 56px;
+background: #0c0c0c;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 20px;
+}
+
+.detail-block h5 {
+font-size: 9px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+margin-bottom: 7px;
+}
+
+.detail-block p {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.7;
+}
+
+.detail-feats {
+display: flex; flex-wrap: wrap; gap: 3px;
+margin-bottom: 8px;
+}
+
+.feat-chip {
+padding: 2px 6px;
+border-radius: 3px;
+font-size: 10px; font-weight: 600;
+background: #1a1a1a;
+border: 1px solid var(–border2);
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+}
+
+.feat-chip.ai {
+background: #10072a;
+border-color: #2d1a60;
+color: var(–purple-lt);
+}
+
+.ai-angle-block {
+border-left: 2px solid var(–purple);
+padding: 10px 12px;
+background: #0d0a1a;
+border-radius: 0 6px 6px 0;
+margin-top: 8px;
+}
+
+.ai-angle-label {
+font-size: 9px; font-weight: 700;
+letter-spacing: 1.5px; text-transform: uppercase;
+color: var(–purple-lt);
+font-family: ‘JetBrains Mono’, monospace;
+margin-bottom: 5px;
+}
+
+.ai-angle-text {
+font-size: 12px;
+color: #bbb;
+line-height: 1.7;
+}
+
+.signal-block {
+background: #120f00;
+border: 1px solid #2a1f00;
+border-radius: 6px;
+padding: 10px 12px;
+margin-top: 6px;
+}
+
+.signal-label {
+font-size: 9px; font-weight: 700;
+letter-spacing: 1.5px; text-transform: uppercase;
+color: #92400e;
+font-family: ‘JetBrains Mono’, monospace;
+margin-bottom: 5px;
+}
+
+.signal-text {
+font-size: 12px;
+color: #d97706;
+line-height: 1.65;
+}
+
+/* ── CELL STYLES ──────────────────────────── */
+.cell-seg {
+font-weight: 600;
+color: var(–text);
+font-size: 13px;
+max-width: 240px;
+}
+
+.cell-cat {
+font-size: 10px;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+margin-top: 2px;
+}
+
+.cell-tam {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+font-weight: 600;
+color: var(–text);
+white-space: nowrap;
+}
+
+.cell-cagr {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+white-space: nowrap;
+}
+
+.cell-leaders {
+font-size: 11px;
+color: var(–muted);
+line-height: 1.8;
+}
+
+.cell-chevron {
+color: var(–faint);
+font-size: 10px;
+transition: transform 0.15s;
+text-align: center;
+}
+
+.tr-main.open .cell-chevron {
+transform: rotate(180deg);
+}
+
+/* FIT BADGES */
+.fit {
+display: inline-block;
+padding: 3px 8px;
+border-radius: 4px;
+font-size: 10px;
+font-weight: 700;
+font-family: ‘JetBrains Mono’, monospace;
+white-space: nowrap;
+border: 1px solid;
+}
+
+.fit-ht  { background: var(–fit-ht-bg); border-color: var(–fit-ht-bd); color: var(–fit-ht-tx); }
+.fit-nat { background: var(–fit-na-bg); border-color: var(–fit-na-bd); color: var(–fit-na-tx); }
+.fit-str { background: var(–fit-st-bg); border-color: var(–fit-st-bd); color: var(–fit-st-tx); }
+.fit-par { background: var(–fit-pa-bg); border-color: var(–fit-pa-bd); color: var(–fit-pa-tx); }
+.fit-wk  { background: var(–fit-wk-bg); border-color: var(–fit-wk-bd); color: var(–fit-wk-tx); }
+.fit-no  { background: var(–fit-no-bg); border-color: var(–fit-no-bd); color: var(–fit-no-tx); }
+
+/* signal dot */
+.sig-dot {
+display: inline-block;
+width: 6px; height: 6px;
+border-radius: 50%;
+background: #d97706;
+vertical-align: middle;
+}
+
+/* no results */
+.no-results {
+padding: 48px;
+text-align: center;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 12px;
+}
+
+/* footer */
+.site-footer {
+padding: 20px 32px;
+border-top: 1px solid var(–border);
+margin-top: 40px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 8px;
+}
+
+.footer-note {
+font-size: 10px;
+color: var(–faint);
+font-family: ‘JetBrains Mono’, monospace;
+line-height: 1.8;
+}
+
+.legend-inline {
+display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+.site-header { padding: 16px; }
+.controls { padding: 12px 16px; }
+.detail-inner { grid-template-columns: 1fr; }
+table { min-width: 600px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- GATE -->
+
+<div id="gate">
+  <div class="gate-wordmark">ClickUp</div>
+  <div class="gate-meta">
+    <h2>Market Landscape · 2025</h2>
+    <p>Devin Triana &middot; Performance Media</p>
+  </div>
+  <div class="gate-form">
+    <input type="password" id="pw" placeholder="· · · · · · · ·" onkeydown="if(event.key==='Enter')auth()">
+    <button onclick="auth()">Enter</button>
+    <div class="gate-err" id="gerr">Incorrect password</div>
+  </div>
+</div>
+
+<!-- APP -->
+
+<div id="app">
+
+<header class="site-header">
+  <div class="header-left">
+    <div class="header-wordmark">ClickUp</div>
+    <h1 class="header-title">Market <span>Landscape</span></h1>
+    <div class="header-sub">ClickUp orbit &mdash; 14 categories &middot; 61 sub-segments &middot; US TAM &middot; March 2026</div>
+  </div>
+  <div class="header-stats" id="stat-row"></div>
+</header>
+
+<div class="controls">
+  <div class="filter-row">
+    <span class="filter-label">Fit</span>
+    <button class="fchip active-all" onclick="setFit('all',this)">All</button>
+    <button class="fchip" data-fit-cls="active-ht"  onclick="setFit('Home Turf',this)">Home Turf</button>
+    <button class="fchip" data-fit-cls="active-nat" onclick="setFit('Native',this)">Native</button>
+    <button class="fchip" data-fit-cls="active-str" onclick="setFit('Strong',this)">Strong</button>
+    <button class="fchip" data-fit-cls="active-par" onclick="setFit('Partial',this)">Partial</button>
+    <button class="fchip" data-fit-cls="active-wk"  onclick="setFit('Weak',this)">Weak</button>
+    <button class="fchip" data-fit-cls="active-no"  onclick="setFit('None',this)">None</button>
+  </div>
+
+  <div class="filter-row">
+    <span class="filter-label">Category</span>
+    <div class="cat-chips" id="cat-chips"></div>
+  </div>
+
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Search segments, leaders, features..." oninput="applyFilters()">
+    <span class="result-count" id="result-count"></span>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table id="main-table">
+    <thead>
+      <tr>
+        <th style="width:28px"></th>
+        <th>Sub-Segment</th>
+        <th>US TAM</th>
+        <th>CAGR</th>
+        <th>Fit</th>
+        <th>Segment Leaders</th>
+        <th style="width:28px" title="Internal signal"></th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="no-results" id="no-results" style="display:none">No segments match the current filters</div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-note">
+    US TAM estimates &middot; Gartner, IDC, Grand View Research, Mordor Intelligence &middot; March 2026<br>
+    Internal signal sourced from ClickUp ARR by dept/industry, ARPW, and media CPW/CPC data
+  </div>
+  <div class="legend-inline" id="legend-inline"></div>
+</footer>
+
+</div><!-- /app -->
+
+<script>
+// ─────────────────────────────────────────────────────
+// DATA — 61 sub-segments
+// Fields: category, name, tam, cagr, capabilities, cuFeatures, aiFeat, fit, leaders, signal, aiAngle
+// ─────────────────────────────────────────────────────
+
+var DATA = [
+
+// ── WORK & PROJECT MANAGEMENT ─────────────────────────
+{ cat:'Work & Project Management', name:'Core Work Management / Task Management', tam:'~$4.5B', cagr:'14–16%',
+  cap:'Task creation & assignment, deadlines, dependencies, status tracking, project views (list, board, Gantt, calendar), workload visibility',
+  feat:['Tasks','Subtasks','Custom Fields','Statuses','Sprints','Multiple Views','Dashboards','Automations'], aiFeat:[],
+  fit:'Home Turf', leaders:'Asana, Monday.com, Smartsheet',
+  signal:'Technology = 3rd largest ARR contributor. Core WM is primary acquisition driver across all industries.',
+  angle:'Brain auto-generates task descriptions and subtasks from a brief. Agents auto-assign tasks from meeting notes, flag blockers, and run daily standups without human input.' },
+
+{ cat:'Work & Project Management', name:'Professional Services Automation (PSA)', tam:'~$1.4B', cagr:'12–14%',
+  cap:'Project-to-invoice workflow, time billing, resource utilization, client portal, profitability tracking, retainer management',
+  feat:['Tasks','Time Tracking','Dashboards','Docs','Guest Access','Automations','Custom Fields'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Teamwork, HoneyBook, Accelo',
+  signal:'Professional Services firms show above-average ARPW in ClickUp portfolio. Client delivery verticals show strong seat expansion.',
+  angle:'Agent tracks billable vs. non-billable time across projects automatically. Brain drafts client-facing status updates. Displaces Teamwork at $5K–$20K/yr for agencies.' },
+
+{ cat:'Work & Project Management', name:'Agile / Engineering Project Management', tam:'~$1.4B', cagr:'13–15%',
+  cap:'Sprint planning, backlog grooming, velocity tracking, burndown charts, story points, Kanban boards, release management',
+  feat:['Sprints','Custom Fields','Board View','Gantt','Automations','GitHub/GitLab Integration'], aiFeat:[],
+  fit:'Home Turf', leaders:'Jira (Atlassian), Linear, Shortcut',
+  signal:'Engineering & IT = significant ARR contributor. Jira migration is a high-intent acquisition signal.',
+  angle:'Brain converts product requirements into structured epics and user stories. Agent auto-updates sprint status from PR/commit activity via GitHub integration.' },
+
+{ cat:'Work & Project Management', name:'Portfolio & Program Management', tam:'~$700M', cagr:'11–13%',
+  cap:'Cross-project visibility, OKR-to-project linkage, executive dashboards, resource allocation across portfolios, risk flags',
+  feat:['Portfolios','Goals','Dashboards','Workload View','Custom Fields','Reporting'], aiFeat:['Brain','Super Agents'],
+  fit:'Home Turf', leaders:'Planview, Smartsheet (Advance), Monday WorkOS',
+  signal:'ClickUp Business+ accounts show highest portfolio-level usage. Seat utilization highest in multi-team workspaces.',
+  angle:'Brain surfaces cross-portfolio blockers and at-risk projects in a weekly digest. Agents escalate when milestones slip without manual monitoring.' },
+
+{ cat:'Work & Project Management', name:'Resource Management & Capacity Planning', tam:'~$600M', cagr:'12–14%',
+  cap:'Team availability, workload balancing, forecasting capacity, skill matching, utilization reporting',
+  feat:['Workload View','Time Estimates','Custom Fields','Dashboards','Automations'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Runn, Float, Resource Guru',
+  signal:'',
+  angle:'Agent monitors workload distribution in real-time and flags over-allocated team members before deadlines slip. Brain forecasts capacity gaps based on upcoming task volume.' },
+
+{ cat:'Work & Project Management', name:'Gantt & Timeline Planning', tam:'~$400M', cagr:'10–12%',
+  cap:'Dependency mapping, critical path analysis, milestone tracking, baseline comparison, schedule risk',
+  feat:['Gantt View','Dependencies','Milestones','Time Estimates','Custom Fields'], aiFeat:['Brain'],
+  fit:'Home Turf', leaders:'TeamGantt, Instagantt, GanttPro',
+  signal:'',
+  angle:'Brain generates an initial Gantt structure from a project brief. Agent auto-adjusts downstream task dates when a dependency slips.' },
+
+{ cat:'Work & Project Management', name:'Event & Campaign Execution PM', tam:'~$600M', cagr:'11–13%',
+  cap:'Event timelines, vendor coordination, run-of-show documents, campaign calendars, approval workflows, post-event reporting',
+  feat:['Tasks','Calendar View','Docs','Automations','Forms','Checklists','Guest Access'], aiFeat:['Brain','Super Agents'],
+  fit:'Native', leaders:'Asana (Events), Notion, Airtable',
+  signal:'Marketing & Creative verticals are underpenetrated relative to market size — first-mover opportunity.',
+  angle:'Agent coordinates vendor follow-ups, triggers approval reminders, compiles post-event reports automatically. Brain drafts run-of-show docs from a task list.' },
+
+{ cat:'Work & Project Management', name:'Construction & Field Project Management', tam:'~$6.5B', cagr:'8–10%',
+  cap:'RFI/submittal tracking, punch lists, field inspections, subcontractor coordination, job costing, safety compliance',
+  feat:['Tasks','Forms','Custom Fields','Docs','Mobile App'], aiFeat:[],
+  fit:'Weak', leaders:'Procore, Autodesk Construction Cloud, Buildertrend',
+  signal:'', angle:'' },
+
+// ── KNOWLEDGE & DOCUMENTATION ─────────────────────────
+{ cat:'Knowledge & Documentation', name:'Wiki / Internal Knowledge Base', tam:'~$3.5B', cagr:'17–19%',
+  cap:'Structured documentation, nested pages, search, permission controls, version history, embedding of media and files',
+  feat:['Docs','Nested Pages','Rich Text','Permissions','Brain Search','Templates'], aiFeat:['Brain'],
+  fit:'Home Turf', leaders:'Confluence (Atlassian), Notion, Guru',
+  signal:'Knowledge Management is a key consolidation driver — teams replacing Confluence cite ClickUp Docs as the primary reason.',
+  angle:'Brain answers questions across all Docs without manual search. Agent auto-archives stale pages and flags docs not updated in 90+ days.' },
+
+{ cat:'Knowledge & Documentation', name:'SOP & Process Documentation', tam:'~$450M', cagr:'25–28%',
+  cap:'Step-by-step process capture, screen recording, automatic doc generation from workflows, version control, acknowledgment tracking',
+  feat:['Docs','Brain','Templates','Checklists','Automations','Task-to-Doc Linking'], aiFeat:['Brain'],
+  fit:'Native', leaders:'Scribe ($2M+/mo ad spend), Tango, Trainual',
+  signal:"Scribe spends $2M+/mo in paid media — highest ad spend of any direct displacement target. CPM and CPC signals are favorable for intercept.",
+  angle:"Brain auto-generates SOPs from existing task and workflow history — eliminating the manual documentation step entirely. This is the core displacement story vs. Scribe." },
+
+{ cat:'Knowledge & Documentation', name:'Onboarding & Training Content', tam:'~$900M', cagr:'15–17%',
+  cap:'Role-based onboarding checklists, course creation, progress tracking, manager visibility, policy acknowledgments',
+  feat:['Docs','Tasks','Checklists','Automations','Templates','Dashboards','Guest Access'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Trainual, Lessonly (Seismic), WorkRamp',
+  signal:'',
+  angle:'Agent triggers onboarding task sequences automatically on new hire creation. Brain generates role-specific onboarding docs from job description and team structure.' },
+
+{ cat:'Knowledge & Documentation', name:'Enterprise Document Management (DMS)', tam:'~$3.2B', cagr:'10–12%',
+  cap:'Compliance-grade version control, audit trails, document retention policies, e-signatures, advanced permissions, regulatory tagging',
+  feat:['Docs','Permissions','Version History'], aiFeat:[],
+  fit:'Weak', leaders:'SharePoint (Microsoft), Box, OpenText',
+  signal:'', angle:'' },
+
+{ cat:'Knowledge & Documentation', name:'Digital Asset Management (DAM)', tam:'~$1.8B', cagr:'14–16%',
+  cap:'Centralized asset library, metadata tagging, rights management, brand portals, asset expiry, format conversion',
+  feat:['Docs (limited)','Integrations (Dropbox, Drive)'], aiFeat:[],
+  fit:'Weak', leaders:'Bynder, Widen (Acquia), Canto',
+  signal:'', angle:'' },
+
+// ── COLLABORATION & COMMUNICATION ─────────────────────
+{ cat:'Collaboration & Communication', name:'AI Meeting Notes & Action Items', tam:'~$220M', cagr:'35–40%',
+  cap:'Automated transcription, AI summary, action item extraction, follow-up task creation, CRM/PM sync',
+  feat:['AI Notetaker','Tasks','Brain','Automations','Calendar Integration'], aiFeat:['AI Notetaker','Brain','Super Agents'],
+  fit:'Strong', leaders:'Fireflies.ai, Otter.ai, Fathom',
+  signal:'',
+  angle:"ClickUp's differentiator: meeting notes become tasks automatically. Fireflies/Otter capture notes but have no coordination layer. Agent assigns, prioritizes, and follows up on action items without human input." },
+
+{ cat:'Collaboration & Communication', name:'Visual Collaboration / Whiteboarding', tam:'~$1.8B', cagr:'18–20%',
+  cap:'Infinite canvas, sticky notes, flowcharts, wireframes, diagramming, real-time multi-user editing, template libraries',
+  feat:['Whiteboards','Mind Maps','Task Embedding','Brain'], aiFeat:['Brain'],
+  fit:'Strong', leaders:'Miro, Mural, FigJam (Figma)',
+  signal:'',
+  angle:'ClickUp Whiteboards convert directly to tasks — the plan-to-execution gap Miro cannot close. Brain generates diagram structures from a text prompt.' },
+
+{ cat:'Collaboration & Communication', name:'Team Messaging & Chat', tam:'~$5.2B', cagr:'13–15%',
+  cap:'Channel-based messaging, DMs, threads, file sharing, search, app integrations, video huddles',
+  feat:['ClickUp Chat','Notifications','Mentions','Task Comments'], aiFeat:[],
+  fit:'Home Turf', leaders:'Slack, Microsoft Teams, Google Chat',
+  signal:'',
+  angle:'Microsoft Copilot deepens enterprise lock-in here. ClickUp Chat is a consolidation and retention play — reduce Slack dependency for teams already in ClickUp, not a replacement.' },
+
+{ cat:'Collaboration & Communication', name:'Async Video Communication', tam:'~$180M', cagr:'22–25%',
+  cap:'Screen + camera recording, timestamped comments, viewer analytics, async feedback loops, video-to-task conversion',
+  feat:['ClickUp Clips','Task Comments','Brain (transcription)'], aiFeat:['Brain'],
+  fit:'Home Turf', leaders:'Loom, Vidyard, Berrycast',
+  signal:'',
+  angle:'Brain transcribes Clips and extracts action items — a small but real differentiator for async-first teams. Retention feature, not acquisition play.' },
+
+{ cat:'Collaboration & Communication', name:'Video Conferencing', tam:'~$5.0B', cagr:'10–12%',
+  cap:'Live video/audio calls, screen sharing, breakout rooms, recording, webinars, waiting rooms',
+  feat:['Integrations only (Zoom, Google Meet)'], aiFeat:[],
+  fit:'None', leaders:'Zoom, Google Meet, Microsoft Teams',
+  signal:'', angle:'' },
+
+// ── CRM & SALES ───────────────────────────────────────
+{ cat:'CRM & Sales', name:'Customer Success Management', tam:'~$1.1B', cagr:'23–25%',
+  cap:'Health scores, renewal tracking, QBR preparation, playbook execution, product usage sync, escalation management',
+  feat:['Tasks','Custom Fields','Dashboards','Automations','Brain','Super Agents'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Gainsight ($30K–$100K+/yr), Totango, ChurnZero',
+  signal:'CS & Account Mgmt = strong internal ARR signal. Mid-market accounts show above-average retention when using ClickUp for CS workflows.',
+  angle:'Gainsight is inaccessible to mid-market at $30K–$100K+/yr. Agent monitors account health signals, triggers QBR prep tasks, flags at-risk accounts automatically — 80% of the capability at a fraction of the cost.' },
+
+{ cat:'CRM & Sales', name:'SMB / Mid-Market CRM', tam:'~$3.8B', cagr:'12–14%',
+  cap:'Contact management, deal pipeline, activity logging, email integration, reporting, forecasting',
+  feat:['Tasks','Custom Fields','Automations','Dashboards','Email Integration','Forms'], aiFeat:['Brain','Automations'],
+  fit:'Strong', leaders:'HubSpot CRM, Pipedrive, Zoho CRM',
+  signal:'Sales is 5th largest ARR contributor by department. Average yield — untapped upside with dedicated acquisition spend.',
+  angle:'Agent auto-creates follow-up tasks from email replies, updates deal stages from activity, triggers onboarding on close. Brain drafts outreach templates from deal context.' },
+
+{ cat:'CRM & Sales', name:'Contact & Lead Management', tam:'~$1.8B', cagr:'11–13%',
+  cap:'Lead capture, enrichment, deduplication, segmentation, lead scoring, list management',
+  feat:['Forms','Custom Fields','Automations','Tasks','Integrations'], aiFeat:['Brain'],
+  fit:'Partial', leaders:'HubSpot, Apollo, ZoomInfo',
+  signal:'',
+  angle:'Agent auto-creates and routes leads captured via ClickUp Forms into a structured pipeline. Brain enriches contact records from web research.' },
+
+{ cat:'CRM & Sales', name:'Revenue Operations (RevOps)', tam:'~$600M', cagr:'18–20%',
+  cap:'Pipeline analytics, forecast accuracy, funnel attribution, tech stack integration, territory management',
+  feat:['Dashboards','Custom Fields','Reporting','Integrations'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Clari, Gong, Salesforce Revenue Cloud',
+  signal:'',
+  angle:'Agent generates weekly pipeline digests and flags forecast risk without manual reporting. Brain synthesizes cross-tool revenue data into exec summaries.' },
+
+{ cat:'CRM & Sales', name:'Enterprise CRM', tam:'~$38B', cagr:'9–11%',
+  cap:'Enterprise contact/account management, AI-driven forecasting, CPQ, territory management, multi-cloud integration, compliance',
+  feat:['Integrations only'], aiFeat:[],
+  fit:'None', leaders:'Salesforce, Microsoft Dynamics, Oracle CX',
+  signal:'', angle:'' },
+
+// ── IT & ENGINEERING ─────────────────────────────────
+{ cat:'IT & Engineering', name:'Internal IT Helpdesk (SMB / Internal)', tam:'~$900M', cagr:'16–18%',
+  cap:'Ticket intake via forms/email, SLA tracking, agent queues, escalation routing, resolution tracking, asset tagging',
+  feat:['Forms','Tasks','Automations','Custom Fields','Brain','Super Agents','Permissions'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Freshservice ($55–$115/seat/mo), Zendesk IT, Jira Service Management',
+  signal:'IT & Ops is one of the highest seat-utilization departments in ClickUp portfolio. Internal IT teams show strong task-per-seat metrics.',
+  angle:'Forms + Brain + Agent = tier-1 ticket resolution without Freshservice\'s $55–$115/seat/mo. Agent classifies, routes, and resolves common tickets autonomously. Direct displacement play.' },
+
+{ cat:'IT & Engineering', name:'Customer-Facing Help Desk / Support Ticketing', tam:'~$2.8B', cagr:'11–13%',
+  cap:'Customer ticket management, SLA enforcement, multi-channel intake (email, chat, social), CSAT tracking, macros',
+  feat:['Forms','Tasks','Automations','Custom Fields','Brain'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Zendesk, Freshdesk, Intercom',
+  signal:'',
+  angle:'Agent handles L1 ticket classification and response drafting. Brain generates reply suggestions from knowledge base. Extends ClickUp to lightweight support ops.' },
+
+{ cat:'IT & Engineering', name:'Bug & Issue Tracking', tam:'~$800M', cagr:'9–11%',
+  cap:'Bug reporting, severity/priority classification, reproduction steps, sprint linkage, developer assignment, status workflows',
+  feat:['Tasks','Custom Fields','Custom Statuses','Automations','GitHub/GitLab Integration','Sprints'], aiFeat:['Brain','Super Agents'],
+  fit:'Home Turf', leaders:'Jira (Atlassian), Linear, Shortcut',
+  signal:'Engineering & IT accounts show above-average seat expansion. Jira migration is a high-frequency inbound signal.',
+  angle:'Agent auto-creates bug tickets from error monitoring tools and assigns to the right developer. Brain generates reproduction steps and test cases from bug descriptions.' },
+
+{ cat:'IT & Engineering', name:'No-Code / Low-Code Automation & Workflow', tam:'~$12B', cagr:'26–30%',
+  cap:'Visual workflow builders, trigger-action logic, API connectors, database management, app building without code',
+  feat:['Automations','Forms','Custom Fields','Webhooks','API'], aiFeat:['Super Agents'],
+  fit:'Partial', leaders:'Zapier, Make (Integromat), Airtable',
+  signal:'',
+  angle:'ClickUp Automations absorb lightweight Zapier and Airtable workflows for teams already in the platform. Consolidation benefit, not a standalone acquisition play.' },
+
+{ cat:'IT & Engineering', name:'DevOps / CI-CD', tam:'~$7.5B', cagr:'18–22%',
+  cap:'Code repository management, CI/CD pipelines, container orchestration, infrastructure-as-code, deployment automation, monitoring',
+  feat:['GitHub/GitLab Integrations only'], aiFeat:[],
+  fit:'Weak', leaders:'GitHub Actions, GitLab, CircleCI',
+  signal:'', angle:'' },
+
+{ cat:'IT & Engineering', name:'Enterprise ITSM', tam:'~$3.4B', cagr:'16–18%',
+  cap:'ITIL-compliant incident/problem/change management, CMDB, service catalog, SLA governance, enterprise integrations',
+  feat:['Integrations only'], aiFeat:[],
+  fit:'None', leaders:'ServiceNow, BMC Helix, Ivanti',
+  signal:'', angle:'' },
+
+// ── MARKETING ────────────────────────────────────────
+{ cat:'Marketing', name:'Campaign Workflow & Content Operations', tam:'~$700M', cagr:'15–17%',
+  cap:'Campaign calendar, brief management, content production workflow, cross-channel coordination, approval routing, performance tracking',
+  feat:['Tasks','Calendar View','Docs','Automations','Forms','Dashboards','Brain','Super Agents'], aiFeat:['Brain','Super Agents'],
+  fit:'Native', leaders:'CoSchedule, Percolate (Seismic), Asana (Marketing)',
+  signal:"Marketing & Creative = largest gap between market size and ClickUp acquisition spend. No dominant standalone owner of this category.",
+  angle:"No incumbent owns this with AI. Brain generates campaign briefs, content outlines, and copy drafts. Agent routes content through review/approval stages and closes loops. First-mover advantage is real." },
+
+{ cat:'Marketing', name:'Creative Review & Approval', tam:'~$500M', cagr:'15–17%',
+  cap:'Asset annotation, version comparison, stakeholder review links, approval tracking, feedback consolidation',
+  feat:['Tasks','Comments','Docs','Automations','Proofing Integrations'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Ziflow, Bynder Workflow, Filestage',
+  signal:'',
+  angle:'Agent triggers review requests, chases approvals, notifies stakeholders of changes automatically. Brain consolidates fragmented feedback into a single revision brief.' },
+
+{ cat:'Marketing', name:'Social Media Management', tam:'~$2.8B', cagr:'12–14%',
+  cap:'Content scheduling, multi-platform publishing, engagement monitoring, analytics, team collaboration on posts',
+  feat:['Tasks','Calendar View','Docs (content drafts)','Automations'], aiFeat:['Brain'],
+  fit:'Partial', leaders:'Hootsuite, Sprout Social, Buffer',
+  signal:'',
+  angle:'ClickUp manages the workflow around social — content planning, brief to publish coordination — but not the publishing itself. Consolidate the pre-publish workflow for teams already using Hootsuite.' },
+
+{ cat:'Marketing', name:'SEO & Content Marketing Platform', tam:'~$1.9B', cagr:'13–15%',
+  cap:'Keyword research, content briefs, on-page optimization, rank tracking, content calendars, backlink analysis',
+  feat:['Docs','Tasks','Calendar View','Brain'], aiFeat:['Brain'],
+  fit:'Partial', leaders:'Semrush, Ahrefs, Clearscope',
+  signal:'',
+  angle:'Brain generates SEO-optimized content outlines and drafts. ClickUp manages the editorial workflow — research to publish. Content ops layer above the SEO tools, not a replacement.' },
+
+{ cat:'Marketing', name:'Marketing Automation / MAP', tam:'~$3.2B', cagr:'11–13%',
+  cap:'Email campaign automation, lead nurturing, segmentation, behavioral triggers, landing pages, A/B testing, attribution',
+  feat:['Integrations only (HubSpot, Marketo)'], aiFeat:[],
+  fit:'None', leaders:'Marketo (Adobe), HubSpot Marketing, Klaviyo',
+  signal:'', angle:'' },
+
+// ── FINANCE & LEGAL ───────────────────────────────────
+{ cat:'Finance & Legal', name:'Compliance Operations / GRC', tam:'~$2.7B', cagr:'12–14%',
+  cap:'Control mapping, evidence collection, audit preparation, remediation tracking, vendor risk, policy management, framework alignment (SOC2, ISO, HIPAA)',
+  feat:['Tasks','Docs','Permissions','Automations','Brain','Super Agents','Forms','Custom Fields'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Vanta ($220M ARR, $4.15B val), Drata, Tugboat Logic',
+  signal:'Finance & Accounting = 4th highest ARR by industry, highest BizPlus rate, 2nd highest seat utilization in portfolio.',
+  angle:'Vanta automates the scanning layer. ClickUp owns the coordination layer above it — remediation tasks, evidence gathering, audit-ready reports. Agent auto-assigns remediation tasks when Vanta flags a gap.' },
+
+{ cat:'Finance & Legal', name:'Finance Close Management', tam:'~$900M', cagr:'13–15%',
+  cap:'Close checklist coordination, task assignment across finance teams, reconciliation tracking, sign-off workflows, variance commentary',
+  feat:['Tasks','Docs','Automations','Permissions','Dashboards','Brain','Super Agents'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'FloQast, BlackLine, Numeric',
+  signal:'Finance & Accounting = 4th highest ARR contributor. Highest BizPlus rate across all departments — signals larger, compliance-conscious teams.',
+  angle:'Agent coordinates close checklists, escalates incomplete items, generates variance commentary drafts. Brain produces audit-ready close reports.' },
+
+{ cat:'Finance & Legal', name:'Contract Lifecycle Management (CLM)', tam:'~$1.6B', cagr:'13–15%',
+  cap:'Contract creation, redlining, approval workflows, signature routing, obligation tracking, renewal alerts, repository search',
+  feat:['Docs','Tasks','Automations','Permissions','Forms'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Ironclad, DocuSign CLM, Conga',
+  signal:'',
+  angle:'ClickUp handles workflow coordination around contracts (intake, review routing, approvals) but not native e-signatures or redlining. Pre-signature workflow management for teams without a full CLM.' },
+
+{ cat:'Finance & Legal', name:'ERP / Core Finance & Accounting', tam:'~$28B', cagr:'7–9%',
+  cap:'General ledger, AP/AR, payroll, financial consolidation, tax compliance, multi-entity management',
+  feat:['Integrations only'], aiFeat:[],
+  fit:'None', leaders:'SAP, Oracle NetSuite, Microsoft Dynamics 365',
+  signal:'', angle:'' },
+
+// ── HR & PEOPLE OPS ───────────────────────────────────
+{ cat:'HR & People Ops', name:'Performance Management & OKR Tracking', tam:'~$2.6B', cagr:'12–14%',
+  cap:'Goal setting, check-in cadences, 360 feedback, performance reviews, development plans, OKR cascade and tracking',
+  feat:['Goals','Tasks','Dashboards','Docs','Automations','Brain'], aiFeat:['Brain'],
+  fit:'Partial', leaders:'Lattice, Workday Perf, 15Five',
+  signal:'',
+  angle:'ClickUp Goals + Brain can generate and track OKRs at a fraction of Lattice\'s setup cost. Angle for mid-market teams replacing spreadsheet-based performance tracking.' },
+
+{ cat:'HR & People Ops', name:'Applicant Tracking / Recruiting (ATS)', tam:'~$1.7B', cagr:'7–9%',
+  cap:'Job posting, candidate pipeline, interview scheduling, scorecards, offer management, background check integration, EEOC reporting',
+  feat:['Tasks','Custom Fields','Forms','Automations','Docs'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Greenhouse, Lever, Ashby',
+  signal:'',
+  angle:'ClickUp manages the hiring pipeline as a project workflow for pre-ATS teams. Agent automates interview scheduling and debrief reminders. Brain drafts job descriptions and scorecard templates.' },
+
+{ cat:'HR & People Ops', name:'Employee Onboarding', tam:'~$550M', cagr:'14–16%',
+  cap:'Pre-boarding task sequences, equipment setup checklists, policy acknowledgments, buddy assignments, 30/60/90 day plans',
+  feat:['Tasks','Docs','Checklists','Automations','Templates','Dashboards'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'BambooHR (Onboarding), Enboarder, Rippling',
+  signal:'',
+  angle:'Agent triggers onboarding sequences automatically on new hire creation via HRIS integration. Brain generates role-specific 30/60/90 day plans from job description and team context.' },
+
+{ cat:'HR & People Ops', name:'Learning & Development (L&D) / LMS', tam:'~$2.8B', cagr:'14–16%',
+  cap:'Course creation, SCORM delivery, learning paths, completion tracking, assessments, certifications, compliance training',
+  feat:['Docs','Tasks','Checklists','Templates'], aiFeat:[],
+  fit:'Weak', leaders:'Docebo, 360Learning, Cornerstone',
+  signal:'', angle:'' },
+
+{ cat:'HR & People Ops', name:'Core HRIS / Payroll', tam:'~$7.8B', cagr:'9–11%',
+  cap:'Employee records, payroll processing, benefits administration, time & attendance, compliance reporting, workforce analytics',
+  feat:['Integrations only'], aiFeat:[],
+  fit:'None', leaders:'Workday, ADP, Rippling',
+  signal:'', angle:'' },
+
+// ── ANALYTICS & REPORTING ─────────────────────────────
+{ cat:'Analytics & Reporting', name:'Operational / Team Dashboards', tam:'~$650M', cagr:'11–13%',
+  cap:'Real-time KPI tracking, cross-project status rollups, goal progress visualization, team workload views, shareable reports',
+  feat:['Dashboards','Reporting','Custom Fields','Goals','Widgets'], aiFeat:['Brain','Super Agents'],
+  fit:'Home Turf', leaders:'Databox, Klipfolio, Monday Dashboards',
+  signal:'Dashboards are a top-used feature across ClickUp\'s highest-ARPW workspaces. Heavy dashboard usage correlates with lower churn.',
+  angle:'Brain generates natural-language dashboard summaries on a schedule. Agent flags anomalies (sprint velocity drop, overdue task spike) and surfaces them to the right stakeholder.' },
+
+{ cat:'Analytics & Reporting', name:'Business Intelligence / Analytics', tam:'~$13B', cagr:'8–10%',
+  cap:'Data warehousing connectors, drag-and-drop report builder, SQL access, data modeling, scheduled reports, embedded analytics',
+  feat:['Dashboards (limited)','Integrations'], aiFeat:[],
+  fit:'Weak', leaders:'Tableau (Salesforce), Power BI (Microsoft), Looker (Google)',
+  signal:'', angle:'' },
+
+{ cat:'Analytics & Reporting', name:'Work Analytics / Productivity Intelligence', tam:'~$350M', cagr:'20–24%',
+  cap:'Team productivity metrics, time-in-status analysis, cycle time, throughput rates, bottleneck identification, cross-tool activity data',
+  feat:['Dashboards','Time Tracking','Custom Fields','Reporting','Brain'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Haystack, LinearB, Allstacks',
+  signal:'Seat utilization and tasks-per-seat are core internal metrics ClickUp tracks — directly translatable to external positioning in this segment.',
+  angle:'Brain analyzes work patterns and generates weekly productivity insights. Agent flags when a team\'s throughput drops below baseline and suggests workload rebalancing.' },
+
+// ── TIME TRACKING & BILLING ───────────────────────────
+{ cat:'Time Tracking & Billing', name:'Project-Based Time Tracking & Client Billing', tam:'~$1.3B', cagr:'14–16%',
+  cap:'Billable/non-billable time capture, client rate management, project budget tracking, time-to-invoice automation, approval workflows',
+  feat:['Time Tracking','Tasks','Custom Fields','Dashboards','Automations','QuickBooks Integration'], aiFeat:['Brain','Super Agents'],
+  fit:'Home Turf', leaders:'Harvest, Teamwork, Avaza',
+  signal:'Professional Services and Agency verticals show above-average ARPW. Time tracking is a frequent upgrade driver to Business+ tier.',
+  angle:'Agent auto-logs time against tasks based on activity patterns. Brain flags budget overrun risk before it happens and drafts client billing summaries.' },
+
+{ cat:'Time Tracking & Billing', name:'General Time Tracking', tam:'~$3.4B', cagr:'17–19%',
+  cap:'One-click timers, team timesheets, manager approval, payroll export, idle detection, project tagging',
+  feat:['Time Tracking','Timesheets','Dashboards','Automations'], aiFeat:['Brain'],
+  fit:'Home Turf', leaders:'Toggl Track, Clockify, Harvest',
+  signal:'',
+  angle:'Native time tracking + AI timesheets eliminates Toggl/Clockify for teams already in ClickUp. Agent suggests time entries based on task activity. Zero additional cost vs. $8–$18/user/mo for standalone tools.' },
+
+{ cat:'Time Tracking & Billing', name:'Invoicing & Payments', tam:'~$2.2B', cagr:'11–13%',
+  cap:'Invoice generation, payment processing, recurring billing, expense tracking, client payment portals, accounting sync',
+  feat:['Integrations only (QuickBooks, Stripe via Zapier)'], aiFeat:[],
+  fit:'Weak', leaders:'FreshBooks, Wave, HoneyBook',
+  signal:'', angle:'' },
+
+// ── FORMS & DATA COLLECTION ───────────────────────────
+{ cat:'Forms & Data Collection', name:'Form Building & Work Intake', tam:'~$700M', cagr:'13–15%',
+  cap:'Conditional logic forms, intake routing, automated task creation from submissions, approval triggers, embedded forms',
+  feat:['Forms','Tasks','Automations','Custom Fields','Brain'], aiFeat:['Brain','Super Agents'],
+  fit:'Home Turf', leaders:'Typeform, JotForm, Google Forms',
+  signal:'Forms are heavily used across IT, HR, and Ops use cases — one of the highest-leverage features for internal intake automation.',
+  angle:'ClickUp Forms create tasks automatically on submission. Agent classifies, prioritizes, and routes intake requests without manual triage. Brain generates follow-up questions from submission content.' },
+
+{ cat:'Forms & Data Collection', name:'No-Code Database & Spreadsheet Replacement', tam:'~$4.5B', cagr:'22–26%',
+  cap:'Relational data views, linked records, grid/gallery/kanban views, formula fields, API access, team collaboration on structured data',
+  feat:['Tasks','Custom Fields','List View','Table View','Dashboards'], aiFeat:['Brain'],
+  fit:'Partial', leaders:'Airtable, Notion Databases, Smartsheet',
+  signal:'',
+  angle:"ClickUp's Table View and Custom Fields absorb lightweight Airtable use cases for teams managing structured data alongside tasks. Not a full relational database replacement." },
+
+// ── CUSTOMER SUCCESS & SUPPORT ────────────────────────
+{ cat:'Customer Success & Support', name:'Knowledge Base / Self-Service Portal', tam:'~$900M', cagr:'14–16%',
+  cap:'Customer-facing help content, article categorization, search, feedback ratings, deflection analytics, multi-language support',
+  feat:['Docs (internal only)','Guest View'], aiFeat:[],
+  fit:'Weak', leaders:'Zendesk Help Center, Intercom Articles, HelpScout',
+  signal:'', angle:'' },
+
+{ cat:'Customer Success & Support', name:'Live Chat & Messaging', tam:'~$1.6B', cagr:'14–16%',
+  cap:'Real-time customer chat, chatbot deflection, agent handoff, conversation history, CSAT capture, proactive messaging',
+  feat:['Integrations only'], aiFeat:[],
+  fit:'None', leaders:'Intercom, Drift, Zendesk Messaging',
+  signal:'', angle:'' },
+
+{ cat:'Customer Success & Support', name:'Account-Based Customer Management', tam:'~$450M', cagr:'22–25%',
+  cap:'Account health dashboards, renewal pipeline, expansion tracking, executive sponsor management, QBR workflows',
+  feat:['Tasks','Custom Fields','Dashboards','Automations','Brain','Super Agents'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Gainsight PX, Planhat, Vitally',
+  signal:'CS & Account Mgmt shows above-average ARPW. Mid-market segment is systematically underserved by enterprise-priced tools.',
+  angle:'Agent monitors account health signals, triggers QBR prep workflows, flags renewal risk 90 days out. Brain generates executive-ready account summaries. Displaces $20K–$50K/yr tools.' },
+
+// ── OPERATIONS & PROCESS AUTOMATION ──────────────────
+{ cat:'Operations & Process Automation', name:'Business Process Management (BPM)', tam:'~$2.8B', cagr:'12–14%',
+  cap:'Visual process mapping, workflow automation, process monitoring, bottleneck analytics, compliance process enforcement',
+  feat:['Automations','Tasks','Dashboards','Docs','Brain','Super Agents'], aiFeat:['Brain','Super Agents'],
+  fit:'Partial', leaders:'Monday WorkOS, Process Street, Nintex',
+  signal:'',
+  angle:'Agent executes recurring process workflows autonomously — daily standups, weekly reviews, approval routing. Brain maps existing manual processes and suggests automation rules.' },
+
+{ cat:'Operations & Process Automation', name:'Meeting Management & Follow-Through', tam:'~$150M', cagr:'28–32%',
+  cap:'Agenda creation, meeting notes, action item capture, follow-up task assignment, meeting analytics, async updates',
+  feat:['AI Notetaker','Tasks','Automations','Docs','Brain','Super Agents','Calendar'], aiFeat:['AI Notetaker','Brain','Super Agents'],
+  fit:'Strong', leaders:'Fireflies.ai, Otter.ai, Fellow',
+  signal:'',
+  angle:"Full meeting-to-action pipeline in one platform: Notetaker captures → Brain summarizes → Agent creates and assigns tasks → Automations send follow-ups. Fireflies/Otter stop at the notes. ClickUp closes the loop." },
+
+{ cat:'Operations & Process Automation', name:'Work Request & Intake Management', tam:'~$400M', cagr:'15–18%',
+  cap:'Structured intake forms, request routing rules, priority queuing, requester status visibility, SLA tracking',
+  feat:['Forms','Tasks','Automations','Custom Fields','Brain','Permissions'], aiFeat:['Brain','Super Agents'],
+  fit:'Native', leaders:'Jira Service Management, ServiceNow Intake, Monday Intake',
+  signal:'IT and Ops departments show highest Forms usage in ClickUp. Internal intake workflows are among the highest-retention use cases.',
+  angle:'Agent auto-triages incoming requests, assigns priority, routes to the right team, and notifies requesters of status — without human intervention.' },
+
+{ cat:'Operations & Process Automation', name:'Standard Recurring Process Execution', tam:'~$300M', cagr:'18–22%',
+  cap:'Recurring checklist templates, run-based tracking, conditional branching, completion verification, audit log',
+  feat:['Recurring Tasks','Checklists','Automations','Templates','Dashboards'], aiFeat:['Brain','Super Agents'],
+  fit:'Native', leaders:'Process Street, Tallyfy, Pipefy',
+  signal:'',
+  angle:'Agent executes recurring process checklists, escalates incomplete items, and reports completion status without manual tracking. Direct displacement of Process Street for teams already in ClickUp.' },
+
+// ── AI-NATIVE PRODUCTIVITY ────────────────────────────
+{ cat:'AI-Native Productivity', name:'AI Writing & Content Generation', tam:'~$1.8B', cagr:'38–42%',
+  cap:'Long-form drafting, email writing, summarization, translation, tone adjustment, template generation',
+  feat:['Brain (writing assistant)','Docs'], aiFeat:['Brain'],
+  fit:'Home Turf', leaders:'Notion AI, Grammarly Business, Jasper',
+  signal:'',
+  angle:'Brain is embedded — no switching cost, no separate subscription. Generates docs, task descriptions, status updates, and client communications within existing workflows.' },
+
+{ cat:'AI-Native Productivity', name:'AI Work Automation / Agent Platforms', tam:'~$600M', cagr:'55–65%',
+  cap:'AI agents that execute multi-step workflows, tool orchestration, autonomous task completion, human-in-the-loop approvals',
+  feat:['Super Agents','Brain','Automations','Integrations'], aiFeat:['Super Agents','Brain'],
+  fit:'Native', leaders:'ClickUp (G2 Leader), Make AI, Zapier AI',
+  signal:"ClickUp named G2 Leader in AI Agents for Business Ops — first-mover recognition. Monday, Asana, and Notion are building agent layers now.",
+  angle:"Super Agents are the product. This is ClickUp's highest-differentiation territory. Agents execute cross-tool workflows autonomously: intake → route → execute → report. No other PM platform has this natively." },
+
+{ cat:'AI-Native Productivity', name:'AI-Assisted Project Intelligence', tam:'~$280M', cagr:'45–55%',
+  cap:'Predictive risk scoring, AI-generated project plans, auto-prioritization, workload forecasting, anomaly detection',
+  feat:['Brain','Dashboards','Custom Fields','Automations'], aiFeat:['Brain','Super Agents'],
+  fit:'Strong', leaders:'Forecast.app, Motion, Asana AI',
+  signal:'',
+  angle:'Brain generates full project plans from a one-line prompt. Auto-prioritization surfaces what matters most each day. Direct counter to Motion\'s AI scheduling angle — with full project coordination, not just calendar management.' }
+
+];
+
+// ─────────────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────────────
+
+var FIT_CLASS = {
+  'Home Turf': 'fit-ht',
+  'Native':    'fit-nat',
+  'Strong':    'fit-str',
+  'Partial':   'fit-par',
+  'Weak':      'fit-wk',
+  'None':      'fit-no'
+};
+
+var ALL_CATS = [];
+DATA.forEach(function(d) {
+  if (ALL_CATS.indexOf(d.cat) < 0) ALL_CATS.push(d.cat);
+});
+
+var activeFit = 'all';
+var activeCat = 'all';
+var openRow   = -1;
+
+// ─────────────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────────────
+
+function auth() {
+  if (document.getElementById('pw').value === 'dtrianaclickup') {
+    sessionStorage.setItem('ok', '1');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display  = 'block';
+  } else {
+    document.getElementById('gerr').style.display = 'block';
+  }
+}
+
+// ─────────────────────────────────────────────────────
+// RENDER HEADER STATS
+// ─────────────────────────────────────────────────────
+
+function renderStats() {
+  var total = DATA.length;
+  var ht    = DATA.filter(function(d){ return d.fit === 'Home Turf'; }).length;
+  var nat   = DATA.filter(function(d){ return d.fit === 'Native'; }).length;
+  var str   = DATA.filter(function(d){ return d.fit === 'Strong'; }).length;
+  var hasAI = DATA.filter(function(d){ return d.aiAngle && d.aiAngle.length > 0; }).length;
+
+  var html = [
+    '<div class="hstat"><div class="hstat-n purple">' + total + '</div><div class="hstat-l">Sub-Segments</div></div>',
+    '<div class="hstat"><div class="hstat-n orange">' + ht + '</div><div class="hstat-l">Home Turf</div></div>',
+    '<div class="hstat"><div class="hstat-n green">' + nat + '</div><div class="hstat-l">Native Fit</div></div>',
+    '<div class="hstat"><div class="hstat-n blue">' + str + '</div><div class="hstat-l">Strong Fit</div></div>',
+    '<div class="hstat"><div class="hstat-n purple">' + hasAI + '</div><div class="hstat-l">AI Angle</div></div>'
+  ].join('');
+  document.getElementById('stat-row').innerHTML = html;
+}
+
+// ─────────────────────────────────────────────────────
+// RENDER CATEGORY CHIPS
+// ─────────────────────────────────────────────────────
+
+function renderCatChips() {
+  var html = '<button class="cchip active" onclick="setCat(\'all\',this)">All Categories</button>';
+  ALL_CATS.forEach(function(c) {
+    html += '<button class="cchip" onclick="setCat(\'' + c.replace(/'/g,"\\'") + '\',this)">' + c + '</button>';
+  });
+  document.getElementById('cat-chips').innerHTML = html;
+}
+
+// ─────────────────────────────────────────────────────
+// RENDER LEGEND
+// ─────────────────────────────────────────────────────
+
+function renderLegend() {
+  var items = [
+    ['Home Turf','fit-ht'],['Native','fit-nat'],['Strong','fit-str'],
+    ['Partial','fit-par'],['Weak','fit-wk'],['None','fit-no']
+  ];
+  var html = items.map(function(x){
+    return '<span class="fit ' + x[1] + '">' + x[0] + '</span>';
+  }).join('');
+  document.getElementById('legend-inline').innerHTML = html;
+}
+
+// ─────────────────────────────────────────────────────
+// FILTER LOGIC
+// ─────────────────────────────────────────────────────
+
+function setFit(val, btn) {
+  activeFit = val;
+  openRow = -1;
+  document.querySelectorAll('.fchip').forEach(function(b) {
+    b.className = 'fchip';
+    if (b === btn) {
+      if (val === 'all') b.className = 'fchip active-all';
+      else if (val === 'Home Turf') b.className = 'fchip active-ht';
+      else if (val === 'Native')    b.className = 'fchip active-nat';
+      else if (val === 'Strong')    b.className = 'fchip active-str';
+      else if (val === 'Partial')   b.className = 'fchip active-par';
+      else if (val === 'Weak')      b.className = 'fchip active-wk';
+      else if (val === 'None')      b.className = 'fchip active-no';
+    }
+  });
+  applyFilters();
+}
+
+function setCat(val, btn) {
+  activeCat = val;
+  openRow = -1;
+  document.querySelectorAll('.cchip').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  var q = (document.getElementById('search').value || '').toLowerCase();
+  var visible = 0;
+
+  var tbody = document.getElementById('tbody');
+  var rows = tbody.querySelectorAll('tr');
+  var i = 0;
+
+  // iterate through all segment rows (main + detail pairs)
+  var mainRows = tbody.querySelectorAll('.tr-main');
+  mainRows.forEach(function(tr) {
+    var idx = parseInt(tr.getAttribute('data-idx'));
+    var d   = DATA[idx];
+    var show = true;
+
+    if (activeFit !== 'all' && d.fit !== activeFit) show = false;
+    if (activeCat !== 'all' && d.cat !== activeCat) show = false;
+    if (q) {
+      var hay = (d.name + d.cat + d.leaders + d.feat.join(' ') + d.cap + d.aiAngle + d.signal).toLowerCase();
+      if (hay.indexOf(q) < 0) show = false;
+    }
+
+    var detailTr = document.getElementById('detail-' + idx);
+
+    if (show) {
+      tr.style.display = '';
+      visible++;
+    } else {
+      tr.style.display = 'none';
+      if (detailTr) {
+        detailTr.style.display = 'none';
+        detailTr.classList.remove('open');
+        tr.classList.remove('open');
+      }
+    }
+
+    // keep detail row in sync — show only if open
+    if (detailTr && show) {
+      detailTr.style.display = tr.classList.contains('open') ? '' : 'none';
+    }
+  });
+
+  // category group headers
+  tbody.querySelectorAll('.tr-cat-header').forEach(function(tr) {
+    var cat = tr.getAttribute('data-cat');
+    // check if any visible segment in this cat
+    var hasVisible = false;
+    DATA.forEach(function(d, idx) {
+      if (d.cat !== cat) return;
+      var mtr = document.querySelector('.tr-main[data-idx="' + idx + '"]');
+      if (mtr && mtr.style.display !== 'none') hasVisible = true;
+    });
+    tr.style.display = hasVisible ? '' : 'none';
+  });
+
+  document.getElementById('result-count').textContent = visible + ' of ' + DATA.length + ' segments';
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ─────────────────────────────────────────────────────
+// RENDER TABLE
+// ─────────────────────────────────────────────────────
+
+function renderTable() {
+  var tbody = document.getElementById('tbody');
+  var html  = '';
+  var lastCat = '';
+
+  DATA.forEach(function(d, idx) {
+
+    // category group header
+    if (d.cat !== lastCat) {
+      html += '<tr class="tr-cat-header" data-cat="' + esc(d.cat) + '"><td colspan="7">' + esc(d.cat) + '</td></tr>';
+      lastCat = d.cat;
+    }
+
+    var featsHtml = d.feat.map(function(f) {
+      var isAI = d.aiFeat.indexOf(f) >= 0;
+      return '<span class="feat-chip' + (isAI ? ' ai' : '') + '">' + esc(f) + '</span>';
+    }).join('');
+
+    var sigDot = d.signal ? '<span class="sig-dot" title="Internal signal available"></span>' : '';
+
+    // main row
+    html += '<tr class="tr-main" data-idx="' + idx + '" onclick="toggleRow(' + idx + ')">'
+      + '<td class="cell-chevron">&#9660;</td>'
+      + '<td><div class="cell-seg">' + esc(d.name) + '</div></td>'
+      + '<td class="cell-tam">' + esc(d.tam) + '</td>'
+      + '<td class="cell-cagr">' + esc(d.cagr) + '</td>'
+      + '<td><span class="fit ' + FIT_CLASS[d.fit] + '">' + esc(d.fit) + '</span></td>'
+      + '<td class="cell-leaders">' + esc(d.leaders) + '</td>'
+      + '<td style="text-align:center">' + sigDot + '</td>'
+      + '</tr>';
+
+    // detail row
+    var capBlock = '<div class="detail-block"><h5>What This Software Does</h5><p>' + esc(d.cap) + '</p>'
+      + '<div class="detail-feats" style="margin-top:10px">' + featsHtml + '</div></div>';
+
+    var aiBlock = d.aiAngle
+      ? '<div class="detail-block"><h5>ClickUp AI / Agent Angle</h5><div class="ai-angle-block"><div class="ai-angle-label">&#9889; Differentiation</div><div class="ai-angle-text">' + esc(d.aiAngle) + '</div></div></div>'
+      : '<div class="detail-block"><h5>ClickUp AI / Agent Angle</h5><p style="color:var(--faint);font-style:italic">No AI angle — not a ClickUp play.</p></div>';
+
+    var sigBlock = d.signal
+      ? '<div class="detail-block"><h5>ClickUp Internal Signal</h5><div class="signal-block"><div class="signal-label">&#9679; Internal Data</div><div class="signal-text">' + esc(d.signal) + '</div></div></div>'
+      : '<div class="detail-block"><h5>ClickUp Internal Signal</h5><p style="color:var(--faint);font-style:italic">No direct internal signal for this segment.</p></div>';
+
+    html += '<tr class="tr-detail" id="detail-' + idx + '" style="display:none">'
+      + '<td colspan="7"><div class="detail-inner">' + capBlock + aiBlock + sigBlock + '</div></td>'
+      + '</tr>';
+  });
+
+  tbody.innerHTML = html;
+}
+
+function toggleRow(idx) {
+  var mainTr   = document.querySelector('.tr-main[data-idx="' + idx + '"]');
+  var detailTr = document.getElementById('detail-' + idx);
+  var isOpen   = mainTr.classList.contains('open');
+
+  // close all
+  document.querySelectorAll('.tr-main.open').forEach(function(tr) {
+    tr.classList.remove('open');
+  });
+  document.querySelectorAll('.tr-detail.open').forEach(function(tr) {
+    tr.classList.remove('open');
+    tr.style.display = 'none';
+  });
+
+  if (!isOpen) {
+    mainTr.classList.add('open');
+    detailTr.classList.add('open');
+    detailTr.style.display = '';
+  }
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+// ─────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────
+
+if (sessionStorage.getItem('ok') === '1') {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('app').style.display  = 'block';
+}
+
+renderStats();
+renderCatChips();
+renderLegend();
+renderTable();
+applyFilters();
+</script>
+
+</body>
+</html>
