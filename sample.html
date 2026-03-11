@@ -2,321 +2,737 @@
 
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Presentation</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClickUp · AI Growth Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+<style>
 :root {
-  --cream: #f5f0e8;
-  --dark: #1a1a1a;
-  --accent: #c8a96e;
-  --muted: #7a7a72;
+  --bg:      #000000;
+  --bg1:     #0a0a0a;
+  --bg2:     #111113;
+  --surface: #161618;
+  --surf2:   #1c1c1f;
+  --bdr:     #232326;
+  --bdr2:    #2e2e33;
+  --text:    #ffffff;
+  --text2:   #9f9faa;
+  --text3:   #4e4e58;
+  --text4:   #2a2a30;
+  /* Super-Agent color palette */
+  --pu:  #7c3aed;
+  --pk:  #e83e8c;
+  --te:  #0fb8a0;
+  --bl:  #3b82f6;
+  --or:  #f97316;
+  --go:  #e8a020;
+  --re:  #ef4444;
+  --lv:  #a78bfa;
+  --r: 10px; --rs: 6px; --rx: 4px;
+  --f: 'Figtree', sans-serif;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f);font-size:14px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--f);cursor:pointer}
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--dark);
-  min-height: 100vh;
+/* GATE */
+#gate{position:fixed;inset:0;z-index:999;background:var(–bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px}
+.g-brand{display:flex;align-items:center;gap:9px}
+.g-word{font-size:19px;font-weight:700;letter-spacing:-.3px}
+.g-head{text-align:center}
+.g-head h2{font-size:28px;font-weight:800;letter-spacing:-.5px;line-height:1.2}
+.g-head p{margin-top:8px;font-size:13px;color:var(–text3)}
+.g-form{display:flex;flex-direction:column;align-items:center;gap:9px;width:288px}
+.g-input{width:100%;padding:13px 16px;background:var(–surface);border:1px solid var(–bdr2);border-radius:var(–r);color:var(–text);font-family:var(–f);font-size:15px;letter-spacing:3px;outline:none;transition:border-color .2s,box-shadow .2s;text-align:center}
+.g-input:focus{border-color:var(–pu);box-shadow:0 0 0 3px rgba(124,58,237,.15)}
+.g-input.err{border-color:var(–re)}
+.g-btn{width:100%;padding:13px;background:var(–pu);border:none;border-radius:var(–r);color:#fff;font-size:14px;font-weight:700;transition:background .15s,transform .1s}
+.g-btn:hover{background:#6c2de0}
+.g-btn:active{transform:scale(.98)}
+.g-err{font-size:12px;color:var(–re);display:none}
+
+/* APP */
+#app{display:none;min-height:100vh}
+
+/* NAV */
+#nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(–bdr)}
+.nav-in{max-width:1380px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:52px;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-word{font-size:14px;font-weight:700;letter-spacing:-.2px}
+.nav-sep{width:1px;height:18px;background:var(–bdr2)}
+.nav-ctx{font-size:12px;color:var(–text3);white-space:nowrap}
+.nav-tabs{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav-tab{padding:5px 13px;border-radius:20px;font-size:13px;font-weight:500;color:var(–text3);background:transparent;border:none;transition:color .12s,background .12s;white-space:nowrap}
+.nav-tab:hover{color:var(–text2)}
+.nav-tab.on{color:var(–text);background:var(–surf2);font-weight:600}
+
+/* PAGES */
+.page{display:none;max-width:1380px;margin:0 auto;padding:44px 28px 100px;animation:pgin .2s ease}
+.page.on{display:block}
+@keyframes pgin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* PAGE HEADER */
+.ph{margin-bottom:40px}
+.ph-eye{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(–text3);margin-bottom:12px}
+.ph-title{font-size:34px;font-weight:800;letter-spacing:-.8px;line-height:1.1}
+.ph-title em{font-style:normal;background:linear-gradient(90deg,var(–lv),var(–pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ph-sub{margin-top:12px;font-size:14px;color:var(–text2);max-width:600px;line-height:1.75;font-weight:400}
+
+/* STATS ROW */
+.stats{display:flex;gap:3px;margin-top:26px;flex-wrap:wrap}
+.stat{padding:16px 20px;background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r);min-width:110px}
+.sn{font-size:28px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.sl{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(–text3);margin-top:4px}
+.c-lv{color:var(–lv)}.c-te{color:var(–te)}.c-pk{color:var(–pk)}
+
+/* SECTION LABEL */
+.slbl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–text3);margin-bottom:12px}
+
+/* DIVIDER */
+.dv{height:1px;background:var(–bdr);margin:32px 0}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.pn{background:#0d0d0d;border:1px solid var(–bdr);color:var(–text3)}
+.pw{background:#1a0505;border:1px solid #3d0f0f;color:var(–re)}
+.pp{background:#1a1000;border:1px solid #3d2500;color:var(–go)}
+.ps{background:#060d1f;border:1px solid #0f2048;color:var(–bl)}
+.pv{background:#061410;border:1px solid #0d3329;color:var(–te)}
+.po{background:#061410;border:1px solid #0d3329;color:var(–te)}
+.pnt{background:#0d0d0d;border:1px solid var(–bdr);color:var(–text3)}
+.pr{background:#1a0505;border:1px solid #3d0f0f;color:var(–re)}
+.ppu{background:#100820;border:1px solid #2d1560;color:var(–lv)}
+.stt{display:inline-block;padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;white-space:nowrap}
+.st-go{background:#100820;border:1px solid #2d1560;color:var(–lv)}
+.st-mkt{background:#061410;border:1px solid #0d3329;color:var(–te)}
+.st-sig{background:#1a1000;border:1px solid #3d2500;color:var(–go)}
+.st-rdy{background:#061410;border:1px solid #0d3329;color:var(–te)}
+
+/* GRADE */
+.grd{font-size:16px;font-weight:800;line-height:1}
+.ga{color:var(–te)}.gb{color:var(–go)}.gc{color:var(–re)}
+.gn{font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(–text3);margin-top:3px}
+
+/* CAGR */
+.cagr{display:flex;align-items:center;gap:7px}
+.ctrack{width:40px;height:3px;background:var(–surf2);border-radius:2px;overflow:hidden;flex-shrink:0}
+.cfill{height:100%;border-radius:2px}
+.cval{font-size:11px;font-weight:700}
+
+/* FOOTER */
+.pfooter{margin-top:52px;padding-top:18px;border-top:1px solid var(–bdr);display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.fnote{font-size:11px;color:var(–text3);line-height:1.8}
+.fnote strong{color:var(–text2)}
+.rtags{display:flex;gap:4px;flex-wrap:wrap}
+.rtag{padding:2px 7px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(–surf2);border:1px solid var(–bdr);color:var(–text3)}
+
+/* ── LANDSCAPE ── */
+.thesis{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:28px}
+.tc{padding:18px 20px;background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r)}
+.tc:first-child{border-left:2px solid var(–pu)}
+.tc h4{font-size:12px;font-weight:700;color:var(–text2);margin-bottom:6px}
+.tc p{font-size:12px;color:var(–text3);line-height:1.7}
+.tc .hi{color:var(–lv);font-weight:600}
+
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:3px;margin-bottom:28px}
+.cc{background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r);padding:17px 19px;cursor:pointer;transition:border-color .12s,background .12s}
+.cc:hover{border-color:var(–bdr2);background:var(–surf2)}
+.cc.ex{border-color:var(–pu)}
+.cc-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.cc-name{font-size:13px;font-weight:700;line-height:1.3}
+.cc-chev{font-size:9px;color:var(–text3);transition:transform .18s;flex-shrink:0;margin-top:3px}
+.cc.ex .cc-chev{transform:rotate(180deg)}
+.cc-meta{display:flex;align-items:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.cc-tam{font-size:10px;color:var(–text3);margin-top:5px}
+.cc-segs{display:none;margin-top:10px}
+.cc-segs.open{display:block}
+.cs{padding:7px 0;border-top:1px solid var(–bdr)}
+.cs-name{font-size:11px;font-weight:600;color:var(–text2)}
+.cs-note{font-size:10px;color:var(–text3);margin-top:2px;line-height:1.5}
+
+.pri-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:3px}
+.prc{background:var(–bg1);border:1px solid var(–bdr);border-left:2px solid var(–pu);border-radius:var(–r);padding:17px 19px}
+.prc-num{font-size:11px;font-weight:700;letter-spacing:1px;color:var(–pu);text-transform:uppercase;margin-bottom:5px}
+.prc-name{font-size:15px;font-weight:700;margin-bottom:5px}
+.prc-why{font-size:12px;color:var(–text2);line-height:1.65}
+.prc-meta{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+
+/* ── BETS ── */
+.rec{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(232,62,140,.07));border:1px solid rgba(124,58,237,.28);border-radius:var(–r);padding:18px 22px;margin-bottom:24px}
+.rec p{font-size:13px;color:var(–text2);line-height:1.75}
+.rec p strong{color:var(–lv)}
+
+.bc{background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r);margin-bottom:3px;overflow:hidden;transition:border-color .12s}
+.bc:hover{border-color:var(–bdr2)}
+.bc.top{border-color:rgba(124,58,237,.32)}
+.bc.top:hover{border-color:rgba(124,58,237,.55)}
+
+.bs{display:grid;grid-template-columns:50px 1fr 124px 62px 62px 62px;align-items:start;gap:0;padding:17px 19px;cursor:pointer}
+.bn{font-size:28px;font-weight:800;color:var(–bdr2);line-height:1.1;padding-top:2px}
+.bc.top .bn{color:rgba(124,58,237,.3)}
+.bw{padding-right:12px}
+.bname{font-size:15px;font-weight:700;line-height:1.3}
+.btype{font-size:10px;color:var(–lv);font-weight:600;letter-spacing:.2px;margin-top:3px}
+.bprev{font-size:11px;color:var(–text3);margin-top:5px;line-height:1.5;font-style:italic}
+.bwarn{font-size:10px;color:var(–go);margin-top:5px}
+.bsc{padding-top:3px}
+.bgc{text-align:center;padding-top:2px}
+
+.bd{display:none;border-top:1px solid var(–bdr);background:var(–bg1);padding:19px 22px}
+.bd.open{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px}
+.bdb h4{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–text3);margin-bottom:8px}
+.bdb p{font-size:12px;color:var(–text2);line-height:1.7}
+.bsig{font-family:monospace;font-size:10px;color:var(–text3);background:var(–surface);padding:8px 10px;border-radius:var(–rs);margin-top:8px;white-space:pre-line;line-height:1.6}
+.bang{border-left:2px solid var(–pu);padding:9px 12px;margin-top:10px;font-size:12px;color:var(–text2);font-style:italic;line-height:1.7;background:var(–surface);border-radius:0 var(–rs) var(–rs) 0}
+
+.entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.ec{background:var(–bg1);border:1px solid var(–bdr);border-radius:var(–r);padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ename{font-size:13px;font-weight:700;margin-bottom:4px}
+.enote{font-size:11px;color:var(–text3)}
+.esig{font-family:monospace;font-size:10px;color:var(–text3);white-space:pre-line;line-height:1.6}
+
+/* ── PLAYBOOK ── */
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(375px,1fr));gap:3px}
+.pbc{background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r);overflow:hidden;display:flex;flex-direction:column}
+.pbh{padding:17px 19px 15px;border-bottom:1px solid var(–bdr)}
+.pbnum{font-size:11px;font-weight:700;letter-spacing:1px;color:var(–text3);text-transform:uppercase;margin-bottom:5px}
+.pbtitle{font-size:15px;font-weight:700;margin-bottom:10px}
+.pbfeats{display:flex;flex-wrap:wrap;gap:3px}
+.ft{padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;background:var(–surf2);border:1px solid var(–bdr);color:var(–text3)}
+.ft.ai{background:#100820;border-color:#2d1560;color:var(–lv)}
+.pbb{padding:16px 19px;flex:1;display:flex;flex-direction:column;gap:11px}
+.pbmeta{font-size:11px;color:var(–text3);line-height:1.65}
+.pbmeta strong{color:var(–text2)}
+.pbag{border-left:2px solid var(–pu);padding:10px 12px;background:var(–bg1);border-radius:0 var(–rs) var(–rs) 0;flex:1}
+.pbag-lbl{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–lv);margin-bottom:5px}
+.pbag-txt{font-size:11px;color:var(–text2);line-height:1.65}
+.pbf{padding:11px 19px;border-top:1px solid var(–bdr);font-size:10px;color:var(–text3)}
+.pbf span{color:var(–re);font-weight:600}
+
+/* ── COMPETITIVE ── */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(450px,1fr));gap:3px}
+.coc{background:var(–surface);border:1px solid var(–bdr);border-radius:var(–r);overflow:hidden}
+.coh{padding:17px 19px;border-bottom:1px solid var(–bdr);display:flex;align-items:center;gap:13px}
+.co-ico{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;font-size:13px;font-weight:800;flex-shrink:0}
+.co-name{font-size:17px;font-weight:800}
+.co-pos{font-size:11px;color:var(–text3);margin-top:2px}
+.cob{padding:16px 19px;display:flex;flex-direction:column;gap:13px}
+.cos{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(–text3);margin-bottom:6px}
+.co-moves{display:flex;flex-direction:column;gap:5px}
+.co-mv{display:flex;gap:9px;font-size:12px;color:var(–text2);line-height:1.55}
+.co-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.dye{background:var(–go)}.dre{background:var(–re)}.dbl{background:var(–bl)}.dgr{background:var(–te)}
+.co-win{border-left:2px solid var(–te);padding:9px 12px;font-size:12px;color:var(–text2);line-height:1.65;background:rgba(15,184,160,.04);border-radius:0 var(–rs) var(–rs) 0}
+.co-thr{border-left:2px solid var(–re);padding:9px 12px;font-size:12px;color:var(–text2);line-height:1.65;background:rgba(239,68,68,.04);border-radius:0 var(–rs) var(–rs) 0}
+
+@media(max-width:900px){
+.ph-title{font-size:26px}
+.bs{grid-template-columns:40px 1fr 100px}
+.bgc:nth-child(5),.bgc:nth-child(6){display:none}
+.bd.open{grid-template-columns:1fr}
+.thesis,.entry-grid{grid-template-columns:1fr}
+.comp-grid,.pb-grid{grid-template-columns:1fr}
+.nav-ctx,.nav-sep{display:none}
 }
+</style>
 
-/* ── LOCK SCREEN ── */
-#lock {
-  position: fixed; inset: 0;
-  background: var(--dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  z-index: 100;
-  transition: opacity 0.6s ease;
-}
-
-#lock.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.lock-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  color: var(--cream);
-  letter-spacing: -0.02em;
-  text-align: center;
-}
-
-.lock-sub {
-  font-size: 0.85rem;
-  color: var(--muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.lock-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 320px;
-  padding: 0 1.5rem;
-}
-
-.lock-input {
-  width: 100%;
-  padding: 0.9rem 1.2rem;
-  background: transparent;
-  border: 1px solid #3a3a3a;
-  border-radius: 4px;
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  outline: none;
-  transition: border-color 0.2s;
-  text-align: center;
-}
-
-.lock-input:focus { border-color: var(--accent); }
-.lock-input::placeholder { color: #555; }
-
-.lock-btn {
-  width: 100%;
-  padding: 0.9rem;
-  background: var(--accent);
-  border: none;
-  border-radius: 4px;
-  color: var(--dark);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.lock-btn:hover { opacity: 0.85; }
-
-.lock-error {
-  font-size: 0.8rem;
-  color: #e07070;
-  letter-spacing: 0.05em;
-  min-height: 1rem;
-}
-
-/* ── CONTENT ── */
-#content {
-  display: none;
-  min-height: 100vh;
-}
-
-#content.visible { display: block; }
-
-header {
-  padding: 3rem 2rem 2rem;
-  border-bottom: 1px solid #ddd8cc;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.header-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.header-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-top: 0.4rem;
-}
-
-.header-date {
-  font-size: 0.8rem;
-  color: var(--muted);
-  text-align: right;
-}
-
-main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-}
-
-.section {
-  margin-bottom: 3rem;
-  opacity: 0;
-  transform: translateY(16px);
-  animation: fadeUp 0.5s ease forwards;
-}
-
-.section:nth-child(1) { animation-delay: 0.1s; }
-.section:nth-child(2) { animation-delay: 0.2s; }
-.section:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.section-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.section-heading {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.section-body {
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: #444;
-  max-width: 620px;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1.25rem;
-}
-
-.card {
-  background: #fff;
-  border: 1px solid #e8e3d8;
-  border-radius: 6px;
-  padding: 1.25rem 1.5rem;
-}
-
-.card-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2rem;
-  color: var(--accent);
-  line-height: 1;
-}
-
-.card-label {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 0.25rem;
-}
-
-footer {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem;
-  border-top: 1px solid #ddd8cc;
-  font-size: 0.75rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-```
-
-  </style>
 </head>
 <body>
 
-  <!-- LOCK SCREEN -->
+<!-- GATE -->
 
-  <div id="lock">
-    <div>
-      <p class="lock-sub">Protected Presentation</p>
-      <h1 class="lock-title">Enter to<br/><em>Continue</em></h1>
-    </div>
-    <div class="lock-form">
-      <input id="pw" class="lock-input" type="password" placeholder="Password" />
-      <button class="lock-btn" onclick="checkPassword()">Enter</button>
-      <p class="lock-error" id="err"></p>
-    </div>
+<div id="gate">
+  <div class="g-brand">
+    <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+      <defs><linearGradient id="lg1" x1="0" y1="28" x2="28" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#e83e8c"/>
+      </linearGradient></defs>
+      <path d="M4 17L10 11L14 16L18 11L24 17" stroke="url(#lg1)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M7 21L14 14L21 21" stroke="url(#lg1)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".45"/>
+    </svg>
+    <span class="g-word">ClickUp</span>
   </div>
+  <div class="g-head">
+    <h2>AI Growth Strategy</h2>
+    <p>Devin Triana · Performance Media · 2025–2026</p>
+  </div>
+  <div class="g-form">
+    <input class="g-input" type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')auth()">
+    <button class="g-btn" onclick="auth()">Enter</button>
+    <span class="g-err" id="gerr">Incorrect password</span>
+  </div>
+</div>
 
-  <!-- CONTENT -->
+<!-- APP -->
 
-  <div id="content">
-    <header>
+<div id="app">
+  <nav id="nav">
+    <div class="nav-in">
+      <div class="nav-brand">
+        <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+          <defs><linearGradient id="lg2" x1="0" y1="28" x2="28" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#3b82f6"/><stop offset="50%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#e83e8c"/>
+          </linearGradient></defs>
+          <path d="M4 17L10 11L14 16L18 11L24 17" stroke="url(#lg2)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M7 21L14 14L21 21" stroke="url(#lg2)" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".45"/>
+        </svg>
+        <span class="nav-word">ClickUp</span>
+      </div>
+      <div class="nav-sep"></div>
+      <span class="nav-ctx">AI Strategy · 2025–26</span>
+      <div class="nav-tabs">
+        <button class="nav-tab on" onclick="goPage('landscape',this)">Landscape</button>
+        <button class="nav-tab" onclick="goPage('bets',this)">The Bets</button>
+        <button class="nav-tab" onclick="goPage('playbook',this)">Playbook</button>
+        <button class="nav-tab" onclick="goPage('competitive',this)">Competitive</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE: LANDSCAPE -->
+
+  <section class="page on" id="landscape">
+    <div class="ph">
+      <div class="ph-eye">Work Software Market · 2025</div>
+      <h1 class="ph-title">Where the <em>opportunity</em> is</h1>
+      <p class="ph-sub">ClickUp competes across 10 major software categories. Most don't matter equally. A handful are where the AI-era displacement story is real, the market is moving, and acquisition economics work.</p>
+      <div class="stats">
+        <div class="stat"><div class="sn">47</div><div class="sl">Segments Mapped</div></div>
+        <div class="stat"><div class="sn c-lv">18</div><div class="sl">Native or Strong Fit</div></div>
+        <div class="stat"><div class="sn c-te">26</div><div class="sl">AI Opportunity</div></div>
+        <div class="stat"><div class="sn c-pk">5</div><div class="sl">Priority Bets</div></div>
+      </div>
+    </div>
+
+```
+<div class="slbl">The Core Thesis</div>
+<div class="thesis">
+  <div class="tc">
+    <h4>Where ClickUp wins outright</h4>
+    <p>Work Management, PSA, Knowledge Base, Campaign Ops, Project Billing — <span class="hi">native fit, AI-extensible, no incumbent owns the AI story yet.</span> These are the consolidation plays.</p>
+  </div>
+  <div class="tc">
+    <h4>Where AI changes the game</h4>
+    <p>IT Helpdesk, Compliance Ops, Customer Success — segments where <span class="hi">ClickUp Agents can replace $20K–$100K/yr point solutions</span> that teams below enterprise scale can't afford.</p>
+  </div>
+  <div class="tc">
+    <h4>Where the new demand is</h4>
+    <p>Vibe Coders, AI Creatives, AI Sales Teams — <span class="hi">net-new audiences forming around AI tools</span> with no work coordination layer and no incumbent. Media cost is cheap. Window is now.</p>
+  </div>
+</div>
+
+<div class="dv"></div>
+<div class="slbl">By Category — Click to Expand Segments</div>
+<div class="cat-grid" id="cat-grid"></div>
+
+<div class="dv"></div>
+<div class="slbl">Top Priority Segments</div>
+<div class="pri-grid" id="pri-grid"></div>
+
+<div class="pfooter">
+  <div class="fnote"><strong>TAM figures:</strong> Global (WW) · Gartner, IDC, Mordor, MarketsandMarkets, Grand View Research<br><strong>Media cost data:</strong> NA-only · Google KP + Meta CPM estimates · March 2026</div>
+  <div class="rtags"><span class="rtag">WW TAM</span><span class="rtag">NA Media</span></div>
+</div>
+```
+
+  </section>
+
+  <!-- PAGE: BETS -->
+
+  <section class="page" id="bets">
+    <div class="ph">
+      <div class="ph-eye">Performance Media · Audience Strategy · March 2026</div>
+      <h1 class="ph-title">The <em>Bets</em></h1>
+      <p class="ph-sub">Six audience bets ranked by the cross-section of market signal, media cost efficiency, and internal data. The top three are the recommendation.</p>
+    </div>
+    <div class="rec"><p><strong>Recommendation:</strong> Fund bets 1–3 as dedicated tests now. Bet 4 is close — prioritize if budget exists. Bets 5–6 are signal-stage only: cheapest CPM in the set, minimum viable budget, no creative investment yet. Re-evaluate in 6 weeks.</p></div>
+    <div class="slbl">Ranked Bets — Click to Expand</div>
+    <div id="bets-wrap"></div>
+    <div class="dv"></div>
+    <div class="slbl">Always-On Entry Tests</div>
+    <div class="entry-grid" id="entry-wrap"></div>
+    <div class="pfooter">
+      <div class="fnote"><strong>Media cost data is NA-only</strong> · CPM indexed to ClickUp baseline ($7.04) · Search CPW indexed to core PM baseline<br>Market signal from global analyst reports · Internal data reflects ClickUp global portfolio</div>
+      <div class="rtags"><span class="rtag">NA Media</span><span class="rtag">Global Internal</span></div>
+    </div>
+  </section>
+
+  <!-- PAGE: PLAYBOOK -->
+
+  <section class="page" id="playbook">
+    <div class="ph">
+      <div class="ph-eye">ClickUp · Feature Bundle Strategy · 2025</div>
+      <h1 class="ph-title">How we <em>win</em></h1>
+      <p class="ph-sub">Six launch-ready bundles — ClickUp features combined to displace point-solution competitors. In each case, a ClickUp Agent closes the gap that makes the displacement story real.</p>
+      <div class="stats">
+        <div class="stat"><div class="sn">6</div><div class="sl">Launch Ready</div></div>
+        <div class="stat"><div class="sn c-lv">6</div><div class="sl">Agent Attachable</div></div>
+        <div class="stat"><div class="sn c-pk">$0</div><div class="sl">Extra Seats</div></div>
+      </div>
+    </div>
+    <div class="pb-grid" id="pb-grid"></div>
+    <div class="pfooter">
+      <div class="fnote">Ad spend validation: AdClarity/SEMrush · NA-only · Competitor pricing from public sources · Market figures are global</div>
+      <div class="rtags"><span class="rtag">NA Ad Data</span><span class="rtag">WW Markets</span></div>
+    </div>
+  </section>
+
+  <!-- PAGE: COMPETITIVE -->
+
+  <section class="page" id="competitive">
+    <div class="ph">
+      <div class="ph-eye">Competitive Intelligence · March 2026</div>
+      <h1 class="ph-title">What we're <em>up against</em></h1>
+      <p class="ph-sub">What the four main competitors are doing in AI, where the acquisition window exists, and what the real threat is if we move slow.</p>
+    </div>
+    <div class="comp-grid" id="comp-grid"></div>
+    <div class="pfooter">
+      <div class="fnote">Sourced from public announcements, Elevate 2025 keynotes, AdClarity estimates · March 2026</div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────
+
+const CATS=[
+  {name:'Work & Project Mgmt',tam:'$1.4B–$14.8B',fit:5,ai:'opportunity',segs:[
+    {name:'Core Work Management',tam:'$9.8B',cagr:15.4,note:'ClickUp\'s home category. Every AI agent feature ships here first.',fit:5,ai:'opportunity'},
+    {name:'Professional Services (PSA)',tam:'~$3.1B',cagr:12.8,note:'Client delivery, time billing, guest access — all native.',fit:5,ai:'opportunity'},
+    {name:'Agile & Engineering PM',tam:'~$3B',cagr:14.2,note:'Jira migration accelerating as AI lowers switching cost.',fit:4,ai:'opportunity'},
+    {name:'Event & Campaign Execution',tam:'~$1.4B',cagr:11.2,note:'Tasks + Docs + Calendar = natural fit.',fit:4,ai:'opportunity'},
+    {name:'Construction & Field PM',tam:'$14.8B',cagr:8.5,note:'Vertical depth not in ClickUp. Pass.',fit:1,ai:'neutral'},
+  ]},
+  {name:'Knowledge & Documentation',tam:'$1B–$8B',fit:5,ai:'opportunity',segs:[
+    {name:'Wiki / Internal Knowledge Base',tam:'~$8B',cagr:18.3,note:'Docs + Brain = direct Confluence/Notion replacement.',fit:5,ai:'opportunity'},
+    {name:'SOP & Process Docs',tam:'~$1B',cagr:27,note:'Brain auto-generates SOPs from task history. Scribe\'s value erodes.',fit:5,ai:'opportunity'},
+    {name:'Onboarding & Training',tam:'~$2B',cagr:16,note:'Docs + checklists cover lightweight onboarding well.',fit:4,ai:'opportunity'},
+    {name:'Enterprise DMS',tam:'$7.4B',cagr:11.8,note:'Compliance and versioning depth not competitive here.',fit:2,ai:'neutral'},
+  ]},
+  {name:'Collaboration & Comms',tam:'$500M–$12B',fit:3,ai:'mixed',segs:[
+    {name:'AI Meeting Notes & Actions',tam:'~$500M',cagr:38,note:'Notetaker → tasks native. Strong intercept opportunity.',fit:4,ai:'opportunity'},
+    {name:'Whiteboarding',tam:'~$4B',cagr:19,note:'Plan-to-task conversion is a Miro differentiator ClickUp has.',fit:4,ai:'opportunity'},
+    {name:'Team Messaging',tam:'~$12B',cagr:14.6,note:'Microsoft Copilot in Teams deepens lock-in. AI makes this harder.',fit:3,ai:'risk'},
+    {name:'Video Conferencing',tam:'$11.5B',cagr:11.2,note:'No competitive play. Integration only.',fit:1,ai:'neutral'},
+  ]},
+  {name:'CRM & Sales',tam:'$2.3B–$88B',fit:4,ai:'opportunity',segs:[
+    {name:'Customer Success',tam:'$2.3B',cagr:24.4,note:'Gainsight $30K+/yr — massive mid-market gap below them.',fit:4,ai:'opportunity'},
+    {name:'SMB Sales Pipeline',tam:'~$8B',cagr:13,note:'Custom fields + automations + Agents = viable lightweight CRM.',fit:4,ai:'opportunity'},
+    {name:'Enterprise CRM',tam:'$88B',cagr:10.5,note:'Salesforce/HubSpot AI deepens lock-in. Not a ClickUp play.',fit:1,ai:'neutral'},
+  ]},
+  {name:'IT & Engineering',tam:'$1.8B–$26.9B',fit:4,ai:'opportunity',segs:[
+    {name:'Internal IT Helpdesk (SMB)',tam:'~$2B',cagr:17.4,note:'Forms + Brain + Agent = tier-1 ticket resolution without Freshservice.',fit:4,ai:'opportunity'},
+    {name:'Bug & Issue Tracking',tam:'$1.8B',cagr:10.2,note:'Custom types + sprints = Jira alternative for mid-size teams.',fit:4,ai:'opportunity'},
+    {name:'No-Code / Low-Code',tam:'$26.9B',cagr:28.1,note:'ClickUp automations absorb lightweight Airtable use cases.',fit:3,ai:'opportunity'},
+    {name:'Enterprise ITSM',tam:'~$7.8B',cagr:17.4,note:'ServiceNow territory. Not a ClickUp play.',fit:1,ai:'neutral'},
+  ]},
+  {name:'Finance & Legal',tam:'$2.1B–$62.8B',fit:3,ai:'mixed',segs:[
+    {name:'Compliance Ops / GRC',tam:'$6.1B',cagr:13.4,note:'Coordination layer above Vanta scanning. Evidence tracking is native.',fit:4,ai:'opportunity'},
+    {name:'Finance Close Management',tam:'$2.1B',cagr:14.2,note:'Agent coordinates close checklists and approval routing.',fit:3,ai:'opportunity'},
+    {name:'ERP / Core Finance',tam:'$62.8B',cagr:7.9,note:'ClickUp is a coordination layer above ERP. Not adjacent.',fit:1,ai:'neutral'},
+  ]},
+  {name:'Marketing',tam:'$1.1B–$7.2B',fit:5,ai:'opportunity',segs:[
+    {name:'Campaign Workflow & Content Ops',tam:'~$1.5B',cagr:16,note:'Calendar + Tasks + Docs + Agents = content ops platform. No dominant owner.',fit:5,ai:'opportunity'},
+    {name:'Creative Review & Approval',tam:'$1.1B',cagr:16.4,note:'Tasks + comments + automations = core review cycle.',fit:4,ai:'opportunity'},
+    {name:'Marketing Automation / MAP',tam:'$7.2B',cagr:12.9,note:'Email delivery infrastructure. Not a ClickUp play.',fit:1,ai:'neutral'},
+  ]},
+  {name:'HR & People Ops',tam:'$3.8B–$23.4B',fit:3,ai:'mixed',segs:[
+    {name:'Performance & OKR Mgmt',tam:'~$5.8B',cagr:13.2,note:'Goals + Brain can generate and track OKRs vs Lattice setup cost.',fit:3,ai:'opportunity'},
+    {name:'Recruiting / ATS',tam:'$3.8B',cagr:7.8,note:'Hiring pipeline as project workflow for pre-ATS teams.',fit:3,ai:'opportunity'},
+    {name:'Core HRIS / Payroll',tam:'$17.7B',cagr:10.5,note:'Compliance infrastructure not in ClickUp. No play.',fit:1,ai:'neutral'},
+  ]},
+  {name:'Analytics & BI',tam:'$1.5B–$31.1B',fit:2,ai:'mixed',segs:[
+    {name:'Operational / Team Dashboards',tam:'~$1.5B',cagr:12,note:'ClickUp Dashboards compete directly here.',fit:4,ai:'opportunity'},
+    {name:'Business Intelligence',tam:'$31.1B',cagr:8.7,note:'Tableau/Power BI territory. Operational dashboards only.',fit:2,ai:'neutral'},
+  ]},
+  {name:'Time Tracking & Billing',tam:'$3B+',fit:5,ai:'opportunity',segs:[
+    {name:'Project-Based Billing',tam:'~$3B',cagr:15,note:'Time → invoice + project tracking. Strongest services bundle.',fit:5,ai:'opportunity'},
+    {name:'Time Tracking (General)',tam:'$8.2B',cagr:18.3,note:'Native time tracking + AI timesheets = Toggl/Clockify replacement.',fit:4,ai:'opportunity'},
+  ]},
+];
+
+const PRIORITIES=[
+  {r:'01',name:'Campaign Workflow & Content Ops',why:'No dominant standalone player. ClickUp + Agents already does this — it just hasn\'t been packaged or sold to this audience. First-mover advantage is real.',p:['pv','po'],pl:['Native Fit','↑ AI Opp']},
+  {r:'02',name:'IT Helpdesk (SMB / Internal)',why:'Forms + Brain + Agent = Freshservice without the $55/seat/month. $91.9B market by 2033. The agent story is the displacement story — and it\'s concrete.',p:['ps','po'],pl:['Strong Fit','↑ AI Opp']},
+  {r:'03',name:'Compliance Ops / GRC',why:'Vanta hit $220M ARR with automated scanning. ClickUp handles the coordination layer above that — remediation tasks, evidence tracking, audit-ready reports. Adjacent, not competing.',p:['ps','po'],pl:['Strong Fit','↑ AI Opp']},
+  {r:'04',name:'Customer Success & Account Mgmt',why:'Gainsight at $30K–$100K+/yr is inaccessible to mid-market. ClickUp Agents give CS teams 80% of the capability at a fraction of the cost, on data they already own.',p:['ps','po'],pl:['Strong Fit','↑ AI Opp']},
+  {r:'05',name:'AI Agents for Business Ops',why:'G2 now has this as a recognized category. ClickUp is already named as a leader. First-mover window is open and narrowing.',p:['pv','po'],pl:['Native Fit','↑ AI Opp']},
+];
+
+const BETS=[
+  {r:1,top:true,name:'Vibe Coders',sub:'Non-Technical Builders',type:'Point Solution Intercept',
+   status:'Test Now',sc:'st-go',m:'A',med:'A',i:'B+',
+   prev:'You built it with AI — now run it with AI.',warn:'Monday.com launched "monday vibe" — window narrowing',
+   md:'$4.79B market · 38% CAGR · 92% of US developers using AI coding tools daily (GitHub/TechCrunch 2025)',
+   medd:'Rep tools: Cursor · Replit · Lovable\nVol +150% vs PM baseline · CPC -40% · CPM -14% vs CU baseline',
+   id:'Technology = 3rd largest ARR contributor. Not yet directly acquired against.\nSearch vs. BAU: -48% CPW · -53% CPW_SMB (520 WS)\nSocial vs. All AI: +54% CPW (30 WS — early signal)',
+   angle:'You built it with AI — now run it with AI. The moment a solo project becomes a team, ClickUp is the coordination layer. Positioned against the tool stack, not competing with it.'},
+  {r:2,top:true,name:'AI Creative Studios',sub:null,type:'Point Solution Intercept',
+   status:'Test Now',sc:'st-go',m:'A',med:'A',i:'B',
+   prev:'Your AI creates it. ClickUp coordinates it.',warn:null,
+   md:'$42B AI video market by 2033 · 32% CAGR · Zero incumbent work management competition in this audience',
+   medd:'Rep tools: Runway · Sora · Midjourney\nVol +120% vs PM · CPC -90% · CPM +26% vs CU baseline\nBest prior signal in the full set across both channels',
+   id:'Creative & Design + Media & Marketing = 6% ARR. Largest gap between external market size and current acquisition spend.',
+   angle:'Your AI creates it. ClickUp coordinates it. As teams 10x creative output, briefing, review, approval, and asset tracking are completely broken. Nobody is selling work management to AI creative studios.'},
+  {r:3,top:true,name:'Transportation & Logistics',sub:null,type:'Vertical Audience',
+   status:'Test Now',sc:'st-go',m:'B+',med:'B+',i:'A',
+   prev:'$14K ARPW vs $6K average — internal data anomaly.',warn:null,
+   md:'AI logistics reaching tipping point in 2026 · 3M+ AI-completed tasks at C.H. Robinson alone',
+   medd:'Rep tools: Samsara · Fleetio · TMS Software\nVol +50% vs PM · CPC +6% · CPM -16% vs CU baseline\nNo prior dedicated test',
+   id:'$14K ARPW vs $6K avg — nearly 2x portfolio average.\nHighest seat utilization · Highest tasks/utilized seat across all industries.\nOnly 219 accounts — massive gap between performance and acquisition investment.',
+   angle:'Logistics teams are buying 4–6 point solutions and coordinating handoffs manually. ClickUp as the agent coordination layer above the fragmented stack — dispatch, carrier updates, load tracking, team comms.'},
+  {r:4,top:false,name:'AI Sales Teams',sub:'SDR Replacement Intercept',type:'Point Solution Intercept',
+   status:'Test Now',sc:'st-go',m:'A',med:'B+',i:'B',
+   prev:'AI runs the outreach. ClickUp runs everything around it.',warn:null,
+   md:'45% of high-performing teams running hybrid AI-SDR model · SDR headcount growth at lowest on record (Forrester/Salesforce 2025)',
+   medd:'Rep tools: Clay · Apollo · 11x\nVol -50% vs PM · CPC -70% · CPM -9% vs CU baseline\nSearch: -24% CPW · +5% CPW_SMB (42 WS — thin sample)',
+   id:'5th largest department ARR contributor. Average yield. No prior dedicated vertical test on sales AI tools specifically.',
+   angle:'AI runs the outreach. ClickUp runs everything around it. Sales teams running AI SDR agents still need to coordinate strategy, handoffs, pipeline reviews, and content requests. That space is unoccupied.'},
+  {r:5,top:false,name:'AI Recruiting & HR Ops',sub:null,type:'Point Solution Intercept',
+   status:'Signal Only',sc:'st-sig',m:'A',med:'B',i:'C+',
+   prev:'Cheapest social CPM in the set at $5.72.',warn:null,
+   md:'$8.17B → $30.8B by 2034 · 67% of organizations using AI in recruitment (LinkedIn Future of Recruiting 2025)',
+   medd:'Rep tools: Greenhouse · HireVue · Lattice\nVol -90% vs PM · CPC -5% · CPM -19% vs CU baseline ($5.72)\nNo prior test — signal budget only',
+   id:'Bottom of ARR contribution by department. 2.1 BU/PWS — weakest seat expansion in portfolio.\nLow risk justifies always-on signal budget.',
+   angle:'AI screens candidates. ClickUp runs the hiring process. Recruiter coordination, interview scheduling, hiring committee tasks, onboarding checklists — the workflow surrounding the AI tool.'},
+  {r:6,top:false,name:'Finance & Accounting',sub:null,type:'Vertical Audience',
+   status:'Signal Only',sc:'st-sig',m:'A',med:'C+',i:'A',
+   prev:'Search disqualified. Social-only at minimum budget.',warn:null,
+   md:'47% of finance teams deployed at least one AI agent · 80% of CFO tasks AI-augmented by 2028 (Deloitte/Gartner)',
+   medd:'Rep tools: Pigment · Vena · FP&A Software\nCPC +200% — SEARCH DISQUALIFIED\nSocial: CPM -9% vs baseline · Social-only play',
+   id:'4th highest ARR contribution by industry · Highest BizPlus rate across all departments.\nStrong internal signal justifies small social-only test.',
+   angle:'Finance teams use 7–12 tools. ClickUp is the coordination layer between them — budgeting cycles, audit workflows, close process coordination. The work around the AI tools, not competing with them.'},
+];
+
+const ENTRY=[
+  {name:'Work Automation',status:'In Market',sc:'st-mkt',sig:'Search vs. BAU: -48% CPW · -55% CPW_SMB (49 WS)\nSocial vs. All AI: +1% / +10% (2K WS)',read:'Search showing strong efficiency across all AI work themes. Social at parity — monitoring.'},
+  {name:'Calendar · Scheduling · Email',status:'Signal Only',sc:'st-sig',sig:'Search vs. BAU: +45% CPW · +31% CPW_SMB (16 WS)\nSocial vs. All AI: -69% / -27% (63 WS)',read:'Search too expensive. Social showing efficiency but sample too small. Hold at minimum until funnel improves.'},
+];
+
+const BUNDLES=[
+  {n:'01',name:'SOP / Onboarding / Training',feats:['Docs','Tasks','Whiteboard','Brain','Templates','Super Agents'],ai:['Brain','Super Agents'],
+   leader:'Scribe.com',lnote:'$2M+/month US ad spend confirmed',aud:'Ops teams · HR · Scaling startups',sc:'st-rdy',
+   agent:'Agent auto-generates SOPs from recorded workflows, updates them when processes change, and answers employee questions directly from the doc in real time.',dis:'Scribe.com (~$2M/mo ad spend validation)'},
+  {n:'02',name:'IT Helpdesk (Internal / SMB)',feats:['Tasks','Forms','Brain','Automations','Custom Fields','Super Agents'],ai:['Brain','Automations','Super Agents'],
+   leader:'Freshservice · Jira SM',lnote:'$55–$115/agent/month',aud:'Internal IT · SMB operations teams',sc:'st-rdy',
+   agent:'Agent auto-triages tickets, routes to correct assignee, pulls resolution from Brain, and auto-closes tier-1 issues without any human touch.',dis:'Freshservice / Jira SM ($55–$115/seat/mo)'},
+  {n:'03',name:'Client Delivery & Agency Portal',feats:['Tasks','Docs','Dashboards','Forms','Guest Access','Time Tracking','Automations'],ai:['Automations','Super Agents'],
+   leader:'Teamwork · HoneyBook',lnote:'Teamwork spending heavily on agency search',aud:'Agencies · Consultants · Professional services',sc:'st-rdy',
+   agent:'Agent sends client status updates automatically, flags overdue deliverables before the client notices, and generates weekly reports without manual input.',dis:'Teamwork / Basecamp ($5K–$20K/yr)'},
+  {n:'04',name:'Compliance Ops Coordination',feats:['Docs','Tasks','Permissions','Automations','Brain','Super Agents','Forms'],ai:['Brain','Automations','Super Agents'],
+   leader:'Vanta · Drata',lnote:'Vanta $220M ARR / $4.15B valuation',aud:'Security · Compliance · Startups pursuing SOC 2 / ISO',sc:'st-rdy',
+   agent:'Agent monitors task completion against framework requirements, collects evidence, flags gaps 30 days before audit deadlines, generates audit-ready reports from live task data.',dis:'Compliance workflow overhead above Vanta ($30K+/yr)'},
+  {n:'05',name:'Customer Success & Account Mgmt',feats:['Tasks','Custom Fields','Dashboards','Brain','Automations','Super Agents'],ai:['Brain','Automations','Super Agents'],
+   leader:'Gainsight · ChurnZero',lnote:'Gainsight $30K–$100K+/yr — priced out of mid-market',aud:'CS teams at mid-market SaaS companies',sc:'st-rdy',
+   agent:'Agent monitors account health from task and engagement data, drafts QBR agendas from project history, flags at-risk accounts before CSMs notice, auto-generates renewal prep docs.',dis:'Gainsight ($30K–$100K+/yr) for mid-market teams'},
+  {n:'06',name:'Meeting-to-Action Pipeline',feats:['AI Notetaker','Tasks','Brain','Automations','Calendar','Super Agents'],ai:['AI Notetaker','Brain','Automations','Super Agents'],
+   leader:'Fireflies.ai · Otter.ai',lnote:'Fireflies spending aggressively on acquisition',aud:'Any team with heavy meeting volume',sc:'st-rdy',
+   agent:'Agent creates tasks from transcript, assigns owners from context, schedules follow-up meetings, and syncs action items to relevant projects — within 2 minutes of meeting end.',dis:'Fireflies / Otter (standalone, no coordination layer)'},
+];
+
+const COMP=[
+  {name:'Asana',l:'A',color:'#e85c4a',pos:'Work Graph · AI Teammates · Enterprise agentic workflows',
+   moves:[{c:'dye',t:'Launched "AI Teammates" — agents that assign tasks, re-prioritize workloads, and summarize cross-functional dependencies autonomously'},
+     {c:'dye',t:'Positioning Work Graph as superior to generic AI, citing 70% agent failure rate when agents lack organizational context'},
+     {c:'dbl',t:'Enterprise sales motion only — not performance media, not emerging audiences'},
+     {c:'dgr',t:'Self-serve is secondary; strong sales-assist on enterprise deals only'}],
+   win:'Asana\'s Work Graph argument is sophisticated but requires enterprise deals to validate. ClickUp can own the emerging audience layer — new teams forming around AI tools — before Asana\'s motion reaches them.',
+   thr:'The Work Graph narrative is resonating at enterprise. If ClickUp doesn\'t develop a clear counter-narrative on data model quality, Asana wins the enterprise AI conversation by default.'},
+  {name:'Monday.com',l:'M',color:'#f5b942',pos:'Agents · monday vibe · Magic · Sidekick · Elevate 2025',
+   moves:[{c:'dre',t:'Launched "monday vibe" at Elevate 2025 — directly targeting Vibe Coders audience with a native product. Window on this audience is narrowing.'},
+     {c:'dye',t:'Introduced monday agents, monday magic, monday sidekick — AI positioned as something that "doesn\'t just manage work but does the work"'},
+     {c:'dbl',t:'Still primarily enterprise-sales-led. No apparent performance media intercept on emerging AI audiences yet'},
+     {c:'dgr',t:'monday CRM spending significantly — SMB sales pipeline is contested'}],
+   win:'Monday\'s paid team has not found the same keyword gaps in ClickUp\'s Vibe Coders + AI Creatives research. Quality Score on those terms currently favors ClickUp. Move before they do.',
+   thr:'monday vibe is a direct product response. If their landing page relevance exceeds ClickUp\'s on vibe coding search terms, the CPW advantage erodes. A dedicated landing page is required immediately.'},
+  {name:'Notion',l:'N',color:'#aaaaaa',pos:'Connected workspace · Notion AI · Wiki → work hub',
+   moves:[{c:'dye',t:'Expanding AI search (NL queries across entire workspace) — positioning as "the OS for work" vs. a task tool'},
+     {c:'dye',t:'Notion AI generating docs and summaries — eating into Brain use case at the document layer'},
+     {c:'dbl',t:'No visible agent automation layer — Notion AI is assistive, not agentic. No autonomous task completion'},
+     {c:'dgr',t:'Struggling to expand from docs-first to full work management. Task adoption lags significantly'}],
+   win:'Notion owns document-first. ClickUp owns task-first. The convergence — where documentation and task execution meet in one AI-connected system — is ClickUp\'s to win. Notion can\'t easily go agentic without rebuilding its data model.',
+   thr:'Notion\'s brand with the "modern team" persona is real. For early-stage companies, Notion is often the first platform. ClickUp needs a clear migration story for Notion-native companies scaling up.'},
+  {name:'Atlassian',l:'A',color:'#0052cc',pos:'Jira · Confluence · Rovo AI · Atlas cross-team goals',
+   moves:[{c:'dye',t:'Rovo AI launched — NL search across Jira, Confluence, and third-party integrations via MCP connectors'},
+     {c:'dye',t:'Atlas for cross-team goal tracking — direct competitor to ClickUp Goals at enterprise'},
+     {c:'dbl',t:'Jira deeply entrenched in engineering. ClickUp Jira migration stories are politically difficult in large orgs'},
+     {c:'dgr',t:'Atlassian struggling to expand beyond engineering — Finance, Marketing, HR buyers actively resist it'}],
+   win:'Atlassian\'s weakness is horizontal expansion. Non-engineering teams at companies already running Jira are the target: the integration story, not the replacement story.',
+   thr:'Rovo AI could become a credible enterprise search play across the Atlassian suite. For companies invested in Jira + Confluence, Rovo reduces the incentive to consolidate in ClickUp.'},
+];
+
+// ── UTILS ─────────────────────────────────────────
+
+const FC={5:'pv',4:'ps',3:'pp',2:'pw',1:'pn'};
+const FL={5:'Native',4:'Strong',3:'Partial',2:'Weak',1:'None'};
+const AC={opportunity:'po',neutral:'pnt',risk:'pr',mixed:'pp'};
+const AL={opportunity:'↑ Opportunity',neutral:'→ Neutral',risk:'↓ Risk',mixed:'~ Mixed'};
+
+function cagr(v){
+  const w=Math.min(100,(v/70)*100);
+  const c=v>=35?'#a78bfa':v>=20?'#0fb8a0':v>=12?'#3b82f6':v>=8?'#e8a020':'#505058';
+  return `<div class="cagr"><div class="ctrack"><div class="cfill" style="width:${w}%;background:${c}"></div></div><span class="cval" style="color:${c}">${v}%</span></div>`;
+}
+
+function grade(g){
+  if(!g) return '<span style="color:var(--text3)">—</span>';
+  const c=(g==='A'||g==='A+')?'ga':(g==='B'||g==='B+')?'gb':'gc';
+  return `<span class="grd ${c}">${g}</span>`;
+}
+
+// ── AUTH ──────────────────────────────────────────
+
+function chk(){if(sessionStorage.getItem('cu')=='1'){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';}}
+function auth(){
+  const v=document.getElementById('pw').value;
+  if(v==='dtrianaclickup'){sessionStorage.setItem('cu','1');document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';}
+  else{document.getElementById('gerr').style.display='block';document.getElementById('pw').classList.add('err');}
+}
+
+// ── NAV ───────────────────────────────────────────
+
+function goPage(id,tab){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if(tab)tab.classList.add('on');
+}
+
+// ── RENDER: LANDSCAPE ─────────────────────────────
+
+function renderLandscape(){
+  // category cards
+  document.getElementById('cat-grid').innerHTML=CATS.map((c,i)=>`
+    <div class="cc" onclick="toggleCat(${i},this)">
+      <div class="cc-hd"><div class="cc-name">${c.name}</div><span class="cc-chev">▼</span></div>
+      <div class="cc-meta">
+        <span class="pill ${FC[c.fit]}">${FL[c.fit]}</span>
+        <span class="pill ${AC[c.ai]}">${AL[c.ai]}</span>
+      </div>
+      <div class="cc-tam">${c.tam}</div>
+      <div class="cc-segs" id="cs-${i}">
+        ${c.segs.map(s=>`<div class="cs"><div class="cs-name">${s.name} · ${s.tam} · ${cagr(s.cagr)}</div><div class="cs-note">${s.note}</div></div>`).join('')}
+      </div>
+    </div>
+  `).join('');
+  // priority grid
+  document.getElementById('pri-grid').innerHTML=PRIORITIES.map(p=>`
+    <div class="prc">
+      <div class="prc-num">Priority ${p.r}</div>
+      <div class="prc-name">${p.name}</div>
+      <div class="prc-why">${p.why}</div>
+      <div class="prc-meta">${p.p.map((cls,j)=>`<span class="pill ${cls}">${p.pl[j]}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+function toggleCat(i,card){
+  const e=document.getElementById(`cs-${i}`);
+  const o=e.classList.contains('open');
+  document.querySelectorAll('.cc-segs').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.cc').forEach(x=>x.classList.remove('ex'));
+  if(!o){e.classList.add('open');card.classList.add('ex');}
+}
+
+// ── RENDER: BETS ──────────────────────────────────
+
+function renderBets(){
+  document.getElementById('bets-wrap').innerHTML=BETS.map((b,i)=>`
+    <div class="bc ${b.top?'top':''}">
+      <div class="bs" onclick="toggleBet(${i})">
+        <div class="bn">${b.r}</div>
+        <div class="bw">
+          <div class="bname">${b.name}${b.sub?` <span style="color:var(--text3);font-weight:400;font-size:12px">· ${b.sub}</span>`:''} ${b.top?'<span class="pill ppu" style="font-size:9px;vertical-align:middle;margin-left:4px">Recommended</span>':''}</div>
+          <div class="btype">${b.type}</div>
+          <div class="bprev">${b.prev}</div>
+          ${b.warn?`<div class="bwarn">⚠ ${b.warn}</div>`:''}
+        </div>
+        <div class="bsc"><span class="stt ${b.sc}">${b.status}</span></div>
+        <div class="bgc">${grade(b.m)}<div class="gn">Market</div></div>
+        <div class="bgc">${grade(b.med)}<div class="gn">Media</div></div>
+        <div class="bgc">${grade(b.i)}<div class="gn">Internal</div></div>
+      </div>
+      <div class="bd" id="bd-${i}">
+        <div class="bdb"><h4>Market Signal</h4><p>${b.md}</p></div>
+        <div class="bdb"><h4>Media Cost</h4><div class="bsig">${b.medd}\n${b.id}</div></div>
+        <div class="bdb"><h4>The Angle</h4><div class="bang">"${b.angle}"</div></div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('entry-wrap').innerHTML=ENTRY.map(t=>`
+    <div class="ec">
       <div>
-        <p class="header-label">Sample Presentation</p>
-        <h1 class="header-title">This Is<br/>A Test Page</h1>
+        <div class="ename">${t.name}</div>
+        <div style="margin-top:4px"><span class="stt ${t.sc}">${t.status}</span></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text2);line-height:1.65">${t.read}</div>
       </div>
-      <p class="header-date">March 2026</p>
-    </header>
-
-```
-<main>
-  <div class="section">
-    <p class="section-label">Overview</p>
-    <h2 class="section-heading">Everything is working</h2>
-    <p class="section-body">If you're reading this, the password worked and your GitHub Pages setup is live. This page is hosted at your permanent URL and can be embedded into ClickUp anytime.</p>
-  </div>
-
-  <div class="section">
-    <p class="section-label">What's Next</p>
-    <h2 class="section-heading">Ready for real content</h2>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-num">01</div>
-        <div class="card-label">Build a real presentation with Claude</div>
-      </div>
-      <div class="card">
-        <div class="card-num">02</div>
-        <div class="card-label">Upload to GitHub and share the URL</div>
-      </div>
-      <div class="card">
-        <div class="card-num">03</div>
-        <div class="card-label">Embed in ClickUp docs</div>
+      <div>
+        <div class="slbl" style="margin-bottom:6px">Prior Signal</div>
+        <div class="esig">${t.sig}</div>
       </div>
     </div>
-  </div>
+  `).join('');
+}
 
-  <div class="section">
-    <p class="section-label">Setup</p>
-    <h2 class="section-heading">Full workflow confirmed</h2>
-    <p class="section-body">Claude → HTML file → Files app → GitHub → GitHub Pages → ClickUp. The whole chain is working end to end.</p>
-  </div>
-</main>
+function toggleBet(i){
+  const d=document.getElementById(`bd-${i}`);
+  const o=d.classList.contains('open');
+  document.querySelectorAll('.bd').forEach(x=>x.classList.remove('open'));
+  if(!o)d.classList.add('open');
+}
 
-<footer>Devin Triana · Confidential</footer>
-```
+// ── RENDER: PLAYBOOK ──────────────────────────────
 
-  </div>
+function renderPlaybook(){
+  document.getElementById('pb-grid').innerHTML=BUNDLES.map(b=>`
+    <div class="pbc">
+      <div class="pbh">
+        <div class="pbnum">Bundle ${b.n} · <span class="stt ${b.sc}" style="font-size:9px">Launch Ready</span></div>
+        <div class="pbtitle">${b.name}</div>
+        <div class="pbfeats">${b.feats.map(f=>`<span class="ft ${b.ai.includes(f)?'ai':''}">${f}</span>`).join('')}</div>
+      </div>
+      <div class="pbb">
+        <div class="pbmeta"><strong>Validated by:</strong> ${b.leader} — ${b.lnote}<br><strong>Audience:</strong> ${b.aud}</div>
+        <div class="pbag">
+          <div class="pbag-lbl">⚡ Agent Story</div>
+          <div class="pbag-txt">${b.agent}</div>
+        </div>
+      </div>
+      <div class="pbf">Displaces: <span>${b.dis}</span></div>
+    </div>
+  `).join('');
+}
 
-  <script>
-    const PASSWORD = 'dtrianaclickup';
+// ── RENDER: COMPETITIVE ───────────────────────────
 
-    document.getElementById('pw').addEventListener('keydown', e => {
-      if (e.key === 'Enter') checkPassword();
-    });
+function renderComp(){
+  document.getElementById('comp-grid').innerHTML=COMP.map(c=>`
+    <div class="coc">
+      <div class="coh">
+        <div class="co-ico" style="background:${c.color}22;color:${c.color}">${c.l}</div>
+        <div><div class="co-name">${c.name}</div><div class="co-pos">${c.pos}</div></div>
+      </div>
+      <div class="cob">
+        <div><div class="cos">Their Moves</div><div class="co-moves">${c.moves.map(m=>`<div class="co-mv"><div class="co-dot ${m.c}"></div><div>${m.t}</div></div>`).join('')}</div></div>
+        <div><div class="cos">Our Window</div><div class="co-win">${c.win}</div></div>
+        <div><div class="cos">Real Threat</div><div class="co-thr">${c.thr}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
 
-    function checkPassword() {
-      const val = document.getElementById('pw').value;
-      if (val === PASSWORD) {
-        document.getElementById('lock').classList.add('hidden');
-        setTimeout(() => {
-          document.getElementById('content').classList.add('visible');
-        }, 600);
-      } else {
-        document.getElementById('err').textContent = 'Incorrect password — try again.';
-        document.getElementById('pw').value = '';
-      }
-    }
-  </script>
+// ── INIT ──────────────────────────────────────────
+chk();
+renderLandscape();
+renderBets();
+renderPlaybook();
+renderComp();
+</script>
 
 </body>
 </html>
